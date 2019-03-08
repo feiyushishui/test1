@@ -1,16 +1,16 @@
 package com.tencent.gaio.affair.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.Map;
 
-@FeignClient(name= "${affair-apis:affair-apis}",url = "http://localhost:8080",path = "/items")
+@FeignClient(name = "${affair-apis:affair-apis}", url = "http://localhost:8080", path = "/items")
 public interface ItemFeign {
 
-    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     String test();
 
     /**
@@ -20,8 +20,7 @@ public interface ItemFeign {
      * @param
      * @return
      */
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    String page(@RequestParam Map<String,Object> map);
-
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    String page(@RequestParam Map<String, Object> map);
 
 }
