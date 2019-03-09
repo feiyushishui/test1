@@ -1,6 +1,7 @@
 package com.tencent.gaio.affair.controller;
 
 import com.tencent.gaio.affair.service.intf.IItemService;
+import com.tencent.gaio.commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,9 +27,9 @@ public class ItemController {
      *
      * @return
      */
-    @RequestMapping(value = {"/{itemTaskCode}/materials"},method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public String ItemMaterialListById(@PathVariable("itemTaskCode") String itemTaskCode){
-        return  iItemService.itemMaterialListById(itemTaskCode);
+    @RequestMapping(value = {"/{itemTaskCode}/materials"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    public String ItemMaterialListById(@PathVariable("itemTaskCode") String itemTaskCode) {
+        return iItemService.itemMaterialListById(itemTaskCode);
     }
 
     /**
@@ -36,9 +37,9 @@ public class ItemController {
      *
      * @return
      */
-    @RequestMapping(value = {"/{itemTaskCode}/materials"},method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
-    public String ItemMaterialListByCode(@PathVariable("itemTaskCode") String itemTaskCode){
-        return  iItemService.itemMaterialListByCode(itemTaskCode);
+    @RequestMapping(value = {"/{itemTaskCode}/materials"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
+    public String ItemMaterialListByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
+        return iItemService.itemMaterialListByCode(itemTaskCode);
     }
 
     /**
@@ -46,9 +47,9 @@ public class ItemController {
      *
      * @return
      */
-    @RequestMapping(value = {"/{itemTaskCode}/configs"},method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public String queryConfigsById(@PathVariable("itemTaskCode") String itemTaskCode){
-        return  iItemService.queryConfigsById(itemTaskCode);
+    @RequestMapping(value = {"/{itemTaskCode}/configs"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    public String queryConfigsById(@PathVariable("itemTaskCode") String itemTaskCode) {
+        return iItemService.queryConfigsById(itemTaskCode);
     }
 
     /**
@@ -56,9 +57,9 @@ public class ItemController {
      *
      * @return
      */
-    @RequestMapping(value = {"/{itemTaskCode}/configs"},method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
-    public String queryConfigsByCode(@PathVariable("itemTaskCode") String itemTaskCode){
-        return  iItemService.queryConfigsByCode(itemTaskCode);
+    @RequestMapping(value = {"/{itemTaskCode}/configs"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
+    public String queryConfigsByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
+        return iItemService.queryConfigsByCode(itemTaskCode);
     }
 
 }
