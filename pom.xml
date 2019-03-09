@@ -20,6 +20,7 @@
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <microservicer-version>1.0.0</microservicer-version>
+        <gaio-core.version>0.0.1</gaio-core.version>
     </properties>
 
     <repositories>
@@ -31,6 +32,11 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>com.tencent</groupId>
+            <artifactId>gaio-core</artifactId>
+            <version>${gaio-core.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.tencent</groupId>
             <artifactId>gaio-commons</artifactId>
@@ -118,6 +124,11 @@
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-parameter-names</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.45</version>
         </dependency>
     </dependencies>
 
