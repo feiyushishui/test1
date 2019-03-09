@@ -15,10 +15,12 @@ public class WorkorderTraceServiceImpl implements IWorkorderTraceService {
     @Autowired
     private WorkorderFeign workorderFeign;
 
+    @Override
     public String findTracesByWorkorderid(String workorderid) {
         return workorderFeign.findTracesByWorkorderid(workorderid, "id");
     }
 
+    @Override
     public String findTracesByWorkorderCode(String workorderCode) {
         return workorderFeign.findTracesByWorkorderCode(workorderCode, "code");
     }
