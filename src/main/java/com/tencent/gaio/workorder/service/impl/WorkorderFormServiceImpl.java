@@ -1,10 +1,10 @@
 package com.tencent.gaio.workorder.service.impl;
 
 
-import com.tencent.gaio.workorder.vo.ApplyVo;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
+import com.tencent.gaio.workorder.vo.ApplyerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class WorkorderFormServiceImpl implements IWorkorderFormService {
      * @return
      */
     @Override
-    public String updateWorkorderById(ApplyVo applyVo, long id) {
+    public String updateWorkorderById(ApplyerVo applyVo, long id) {
         return workorderFeign.updateWorkorderById(applyVo, id, "id");
     }
 
@@ -60,7 +60,7 @@ public class WorkorderFormServiceImpl implements IWorkorderFormService {
      * @return
      */
     @Override
-    public String updateWorkorderByCode(ApplyVo applyVo, String workorderCode) {
+    public String updateWorkorderByCode(ApplyerVo applyVo, String workorderCode) {
         return workorderFeign.updateWorkorderByCode(applyVo, workorderCode, "code");
     }
 }

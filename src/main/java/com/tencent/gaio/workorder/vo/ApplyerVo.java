@@ -7,14 +7,14 @@ import com.tencent.gaio.workorder.domain.Person;
 /**
  * 申请人
  */
-public class ApplyVo {
+public class ApplyerVo {
     // 办理人userId
     private String operatedBy;
 
     private Person person;
     private Corporator corporator;
 
-    public ApplyVo() {
+    public ApplyerVo() {
     }
 
     public Corporator getCorporator() {

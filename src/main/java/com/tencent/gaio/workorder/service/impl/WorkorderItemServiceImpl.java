@@ -1,7 +1,6 @@
 package com.tencent.gaio.workorder.service.impl;
 
 
-import com.tencent.gaio.apis.workorder.entity.WorkorderItemEntity;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
@@ -25,7 +24,7 @@ public class WorkorderItemServiceImpl implements IWorkorderItemService {
      * @return
      */
     @Override
-    public ResponseEntity<WorkorderItemEntity> findItemByWorkorderid(String workorderid) {
+    public ResponseEntity<WorkorderItem> findItemByWorkorderid(String workorderid) {
         return workorderFeign.findItemByWorkorderid(workorderid, "id");
     }
 
@@ -36,7 +35,7 @@ public class WorkorderItemServiceImpl implements IWorkorderItemService {
      * @return
      */
     @Override
-    public ResponseEntity<WorkorderItemEntity> findItemByWorkorderCode(String workorderCode) {
+    public ResponseEntity<WorkorderItem> findItemByWorkorderCode(String workorderCode) {
         return workorderFeign.findItemByWorkorderCode(workorderCode, "code");
     }
 }
