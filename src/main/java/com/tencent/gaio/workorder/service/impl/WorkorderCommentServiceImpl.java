@@ -20,4 +20,9 @@ public class WorkorderCommentServiceImpl implements IWorkorderCommentService {
     public Integer createWorkorderComment(String workorderId, String taskDefKey, CommentVo commentVo) {
         return workorderFeign.createWorkorderComment(workorderId, taskDefKey, commentVo, "id").getBody();
     }
+
+    @Override
+    public ResponseEntity getWorkorderComment(String workorderId) {
+        return workorderFeign.getWorkorderComment(workorderId);
+    }
 }

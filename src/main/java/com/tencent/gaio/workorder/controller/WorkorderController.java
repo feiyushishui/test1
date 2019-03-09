@@ -114,6 +114,17 @@ public class WorkorderController {
     }
 
     /**
+     * 查询工单意见
+     *
+     * @param workorderId
+     * @return
+     */
+    @GetMapping(value = "/workorders/{workorderCode}/opinions")
+    public ResponseEntity getWorkorderComment(@PathVariable("workorderCode") String workorderId) {
+        return ResponseEntity.status(HttpStatus.OK).body(workorderCommentService.getWorkorderComment(workorderId));
+    }
+
+    /**
      * 提交工单意见
      *
      * @param workorderId

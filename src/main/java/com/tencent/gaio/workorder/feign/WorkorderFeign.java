@@ -1,5 +1,6 @@
 package com.tencent.gaio.workorder.feign;
 
+import com.tencent.gaio.commons.http.DataItem;
 import com.tencent.gaio.workorder.domain.WorkorderApplyer;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
@@ -66,6 +67,9 @@ public interface WorkorderFeign {
 
     @RequestMapping(value = "/workorders/{workorderCode}/claim/{actInstId}", method = RequestMethod.PUT)
     ResponseEntity<Integer> claimWorkOrder(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody ClaimVo claimVo, @RequestParam("mark") String mark);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/opinions", method = RequestMethod.GET)
+    ResponseEntity<DataItem> getWorkorderComment(@PathVariable("workorderCode") String workorderId);
 
     @RequestMapping(value = "/workorders/{workorderCode}/{taskDefKey}/opinions", method = RequestMethod.POST)
     ResponseEntity<Integer> createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo, @RequestParam("mark") String mark);
