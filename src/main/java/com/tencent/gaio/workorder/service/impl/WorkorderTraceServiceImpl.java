@@ -20,4 +20,8 @@ public class WorkorderTraceServiceImpl implements IWorkorderTraceService {
     public ResponseEntity findTracesByWorkorderid(String workorderid){
         return workorderFeign.findTracesByWorkorderid(workorderid, "id");
     }
+
+    public String findTracesByWorkorderCode(String workorderCode){
+        return workorderFeign.findTracesByWorkorderCode(workorderCode, "code");
+    }
 }

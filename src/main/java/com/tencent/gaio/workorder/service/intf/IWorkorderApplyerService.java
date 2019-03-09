@@ -10,4 +10,12 @@ public interface IWorkorderApplyerService {
      * @return
      */
     ResponseEntity findApplyerByWorkorderid(String workorderid);
+    /**
+     * 通过工单code查询基本信息
+     *
+     * @param workorderCode
+     * @return
+     */
+    ResponseEntity findApplyerByWorkorderCode(String workorderCode);
+
 }
