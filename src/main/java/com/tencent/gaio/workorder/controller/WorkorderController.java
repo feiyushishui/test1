@@ -15,13 +15,23 @@ public class WorkorderController {
     private IWorkorderFormService workorderFormService;
 
     /**
-     * 查询工单-表单
+     * 根据id查询工单-表单
      *
      * @return
      */
     @GetMapping(value = "/workorders/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity getWorkorderFormById(@PathVariable("workorderCode") String workorderId) {
         return workorderFormService.findByWorkorderid(workorderId);
+    }
+
+    /**
+     * 根据code查询工单-表单
+     *
+     * @return
+     */
+    @GetMapping(value = "/workorders/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
+    public ResponseEntity getWorkorderFormByCode(@PathVariable("workorderCode") String workorderCode) {
+        return workorderFormService.findByWorkorderCode(workorderCode);
     }
 
     /**

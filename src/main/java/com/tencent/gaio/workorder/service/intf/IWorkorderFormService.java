@@ -28,4 +28,12 @@ public interface IWorkorderFormService {
      * @return
      */
     String updateWorkorderByCode(ApplyVo applyVo, String workorderCode);
+
+    /**
+     * 通过工单code查询表单
+     *
+     * @param workorderCode
+     * @return
+     */
+    ResponseEntity findByWorkorderCode(String workorderCode);
 }
