@@ -19,7 +19,7 @@ public interface AffairFeign {
      * @param applyVo
      * @return
      */
-    @RequestMapping(value = "/{workorderCode}/applyers", method = RequestMethod.PUT,params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    @RequestMapping(value = "/{workorderCode}/applyers", method = RequestMethod.PUT)
     String updateWorkorderById(@RequestBody ApplyVo applyVo, @PathVariable("workorderCode") long workorderCode,@RequestParam("mark") String mark);
 
     /**

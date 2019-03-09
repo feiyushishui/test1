@@ -13,12 +13,12 @@ public class SomeService implements ISomeService {
     private AffairFeign affairFeign;
 
     @Override
-    public String updateWorkorderById(ApplyVo applyVo, long id,String mark) {
-        return affairFeign.updateWorkorderById(applyVo, id,mark);
+    public String updateWorkorderById(ApplyVo applyVo, long id) {
+        return affairFeign.updateWorkorderById(applyVo, id, "id");
     }
 
     @Override
-    public String getWorkorderFormById(long id, String mark) {
-        return affairFeign.getWorkorderFormById(id, mark);
+    public String getWorkorderFormById(long id) {
+        return affairFeign.getWorkorderFormById(id, "id");
     }
 }
