@@ -1,5 +1,7 @@
 package com.tencent.gaio.workorder.feign;
 
+import com.tencent.gaio.apis.workorder.domain.Applyer;
+import com.tencent.gaio.apis.workorder.entity.WorkorderItemEntity;
 import com.tencent.gaio.workorder.domain.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +17,21 @@ public interface WorkorderFeign {
     ResponseEntity<WorkorderForm> findByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
 
     @RequestMapping(value = "/workorders/{workorderCode}/applyers", method = RequestMethod.GET)
-    ResponseEntity<WorkorderApplyer> findApplyerByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+    ResponseEntity<Applyer> findApplyerByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/applyers", method = RequestMethod.GET)
+    ResponseEntity<Applyer> findApplyerByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
     @RequestMapping(value = "/workorders/{workorderCode}/items", method = RequestMethod.GET)
-    ResponseEntity<WorkorderItem> findItemByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+    ResponseEntity<WorkorderItemEntity> findItemByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
 
+    @RequestMapping(value = "/workorders/{workorderCode}/items", method = RequestMethod.GET)
+    ResponseEntity<WorkorderItemEntity> findItemByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
     @RequestMapping(value = "/workorders/{workorderCode}/traces", method = RequestMethod.GET)
-    ResponseEntity<WorkorderTraces> findTracesByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+    String findTracesByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/traces", method = RequestMethod.GET)
+    String findTracesByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
 }

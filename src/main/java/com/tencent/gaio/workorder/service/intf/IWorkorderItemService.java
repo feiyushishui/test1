@@ -10,4 +10,7 @@ public interface IWorkorderItemService {
      * @return
      */
     ResponseEntity findItemByWorkorderid(String workorderid);
+
+
+    ResponseEntity findItemByWorkorderCode(String workorderCode);
 }

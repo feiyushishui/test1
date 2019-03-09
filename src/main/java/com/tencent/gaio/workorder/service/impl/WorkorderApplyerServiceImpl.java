@@ -1,6 +1,7 @@
 package com.tencent.gaio.workorder.service.impl;
 
 
+import com.tencent.gaio.apis.workorder.domain.Applyer;
 import com.tencent.gaio.workorder.domain.WorkorderApplyer;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
@@ -24,7 +25,18 @@ public class WorkorderApplyerServiceImpl implements IWorkorderApplyerService {
      * @return
      */
     @Override
-    public ResponseEntity<WorkorderApplyer> findApplyerByWorkorderid(String workorderid) {
+    public ResponseEntity<Applyer> findApplyerByWorkorderid(String workorderid) {
         return workorderFeign.findApplyerByWorkorderid(workorderid, "id");
     }
+    /**
+     * 通过code查询基本信息
+     *
+     * @param workorderCode
+     * @return
+     */
+    @Override
+    public ResponseEntity<Applyer> findApplyerByWorkorderCode(String workorderCode) {
+        return workorderFeign.findApplyerByWorkorderCode(workorderCode, "code");
+    }
+
 }

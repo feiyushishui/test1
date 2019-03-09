@@ -35,7 +35,7 @@ public class WorkorderController {
     }
 
     /**
-     * 查询工单-申请人信息
+     * 查询工单-申请人信息:id
      *
      * @return
      */
@@ -43,9 +43,18 @@ public class WorkorderController {
     public ResponseEntity getWorkorderApplyerById(@PathVariable("workorderCode") String workorderId) {
         return workorderApplyerService.findApplyerByWorkorderid(workorderId);
     }
+    /**
+     * 查询工单-申请人信息:code
+     *
+     * @return
+     */
+    @GetMapping(value = "/workorders/{workorderCode}/applyers", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
+    public ResponseEntity getWorkorderApplyerByCode(@PathVariable("workorderCode") String workorderCode) {
+        return workorderApplyerService.findApplyerByWorkorderCode(workorderCode);
+    }
 
     /**
-     * 查询工单-事项信息
+     * 查询工单-事项信息:id
      *
      * @return
      */
@@ -53,17 +62,35 @@ public class WorkorderController {
     public ResponseEntity getWorkorderItemById(@PathVariable("workorderCode") String workorderId) {
         return workorderItemService.findItemByWorkorderid(workorderId);
     }
+    /**
+     * 查询工单-事项信息:code
+     *
+     * @return
+     */
+    @GetMapping(value = "/workorders/{workorderCode}/items", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
+    public ResponseEntity getWorkorderItemByCode(@PathVariable("workorderCode") String workorderCode) {
+        return workorderItemService.findItemByWorkorderCode(workorderCode);
+    }
+
 
     /**
-     * 查询工单痕迹
+     * 查询工单痕迹:id
      *
      * @return
      */
     @GetMapping(value = "/workorders/{workorderCode}/traces", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public ResponseEntity getWorkorderTraceById(@PathVariable("workorderCode") String workorderId) {
-        return workorderTraceService.findTraceByWorkorderid(workorderId);
+    public String getWorkorderTraceById(@PathVariable("workorderCode") String workorderId) {
+        return workorderTraceService.findTracesByWorkorderid(workorderId);
     }
-
+    /**
+     * 查询工单痕迹:code
+     *
+     * @return
+     */
+    @GetMapping(value = "/workorders/{workorderCode}/traces", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
+    public String getWorkorderTraceByCode(@PathVariable("workorderCode") String workorderCode) {
+        return workorderTraceService.findTracesByWorkorderCode(workorderCode);
+    }
 
 
 }

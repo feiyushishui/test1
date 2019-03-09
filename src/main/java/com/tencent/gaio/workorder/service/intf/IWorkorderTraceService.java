@@ -10,5 +10,12 @@ public interface IWorkorderTraceService {
      * @param workorderid
      * @return
      */
-    ResponseEntity findTracesByWorkorderid(String workorderid);
+    String findTracesByWorkorderid(String workorderid);
+    /**
+     * 通过工单code查询工单痕迹
+     *
+     * @param workorderCode
+     * @return
+     */
+    String findTracesByWorkorderCode(String workorderCode);
 }
