@@ -7,6 +7,7 @@ import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderTraceService;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
+import com.tencent.gaio.workorder.vo.WorkorderFormVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -125,5 +126,30 @@ public class WorkorderController {
     @GetMapping(value = "/workorders/{workorderCode}/traces", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
     public String getWorkorderTraceByCode(@PathVariable("workorderCode") String workorderCode) {
         return workorderTraceService.findTracesByWorkorderCode(workorderCode);
+    }
+
+    /**
+     * 通过id更新工单-表单
+     *
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"}, method = RequestMethod.PUT)
+    public String updateFormsByWorkorderId(@RequestBody WorkorderFormVo vo, @PathVariable("workorderCode") Long workorderId) {
+
+        return workorderFormService.updateFormsByWorkorderId(vo, workorderId);
+    }
+
+
+    /**
+     * 通过code更新工单-表单
+     *
+     * @param vo
+     * @return
+     */
+    @RequestMapping(value = "/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"}, method = RequestMethod.PUT)
+    public String updateFormsByWorkorderCode(@RequestBody WorkorderFormVo vo, @PathVariable("workorderCode") String workorderCode) {
+
+        return workorderFormService.updateFormsByWorkorderCode(vo, workorderCode);
     }
 }
