@@ -16,6 +16,7 @@ public class WorkorderTraceServiceImpl implements IWorkorderTraceService {
     @Autowired
     private WorkorderFeign workorderFeign;
 
+    @Override
     public ResponseEntity findTracesByWorkorderid(String workorderid){
         return workorderFeign.findTracesByWorkorderid(workorderid, "id");
     }
