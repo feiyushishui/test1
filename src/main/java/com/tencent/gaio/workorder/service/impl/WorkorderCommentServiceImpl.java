@@ -1,6 +1,7 @@
 package com.tencent.gaio.workorder.service.impl;
 
 
+import com.tencent.gaio.commons.http.DataItem;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderCommentService;
 import com.tencent.gaio.workorder.vo.CommentVo;
@@ -22,7 +23,7 @@ public class WorkorderCommentServiceImpl implements IWorkorderCommentService {
     }
 
     @Override
-    public ResponseEntity getWorkorderComment(String workorderId) {
-        return workorderFeign.getWorkorderComment(workorderId);
+    public DataItem getWorkorderComment(String workorderId) {
+        return workorderFeign.getWorkorderComment(workorderId).getBody();
     }
 }
