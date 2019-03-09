@@ -62,4 +62,23 @@ public class ItemController {
         return iItemService.queryConfigsByCode(itemTaskCode);
     }
 
+    /**
+     * 根据事项实施编码code查询数据
+     * @param itemTaskCode
+     * @return
+     */
+    @GetMapping(value = "/items/{itemTaskCode}", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
+    public ResponseEntity queryItemByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
+        return iItemService.queryItemByCode(itemTaskCode);
+    }
+
+    /**
+     * 根据事项实施标识id查询数据
+     * @param itemTaskCode
+     * @return
+     */
+    @GetMapping(value = "/items/{itemTaskCode}", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    public ResponseEntity queryItemById(@PathVariable("itemTaskCode") long itemTaskCode) {
+        return iItemService.queryItemById(itemTaskCode);
+    }
 }

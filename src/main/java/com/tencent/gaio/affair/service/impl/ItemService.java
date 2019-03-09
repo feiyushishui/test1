@@ -51,6 +51,23 @@ public class ItemService implements IItemService {
 
     }
 
+    /**
+     * 根据事项实施编码code查询数据
+     * @param itemTaskCode
+     * @return
+     */
+    @Override
+    public ResponseEntity<Item> queryItemByCode(String itemTaskCode) {
+        return itemFeign.queryItemByCode(itemTaskCode,"code");
+    }
 
-
+    /**
+     * 根据事项实施标识id查询数据
+     * @param itemTaskCode
+     * @return
+     */
+    @Override
+    public ResponseEntity<Item> queryItemById(long itemTaskCode) {
+        return itemFeign.queryItemById(itemTaskCode,"id");
+    }
 }

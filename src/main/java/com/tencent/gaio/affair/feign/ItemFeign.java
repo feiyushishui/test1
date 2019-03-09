@@ -53,4 +53,21 @@ public interface ItemFeign {
     @RequestMapping(value = "/{itemTaskCode}/configs?mark=code",method = RequestMethod.GET)
     String queryConfigsByCode(@PathVariable("itemTaskCode") String itemTaskCode);
 
+    /**
+     * 根据事项实施编码code查询数据
+     * @param itemTaskCode
+     * @param mark
+     * @return
+     */
+    @RequestMapping(value = "/{itemTaskCode}", method = RequestMethod.GET)
+    ResponseEntity<Item> queryItemByCode(@PathVariable("itemTaskCode") String itemTaskCode, @RequestParam("mark") String mark);
+
+    /**
+     * 根据事项实施标识id查询数据
+     * @param itemTaskCode
+     * @param mark
+     * @return
+     */
+    @RequestMapping(value = "/{itemTaskCode}", method = RequestMethod.GET)
+    ResponseEntity<Item> queryItemById(@PathVariable("itemTaskCode") long itemTaskCode, @RequestParam("mark") String mark);
 }

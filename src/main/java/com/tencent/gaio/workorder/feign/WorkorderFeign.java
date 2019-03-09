@@ -13,14 +13,22 @@ import org.springframework.web.bind.annotation.*;
 public interface WorkorderFeign {
 
     /**
-     * 查询工单-表单
-     *
+     * 根据id查询工单-表单
      * @param workorderId
      * @param mark
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.GET)
     ResponseEntity<WorkorderForm> findByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+
+    /**
+     * 根据code查询工单-表单
+     * @param workorderCode
+     * @param mark
+     * @return
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.GET)
+    ResponseEntity<WorkorderForm> findByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
     /**
      * 根据id更新申请人信息
