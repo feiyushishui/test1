@@ -1,15 +1,20 @@
 package com.tencent.gaio.workorder.controller;
 
-import com.tencent.gaio.affair.feign.AffairFeign;
+
+import com.tencent.gaio.workorder.vo.ApplyVo;
+import com.tencent.gaio.workorder.feign.AffairFeign;
+import com.tencent.gaio.workorder.service.intf.ISomeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SomeController {
 
     @Autowired
     private AffairFeign affairFeign;
+
+    @Autowired
+    private ISomeService someService;
 
     @GetMapping("/test")
     public Long test() {
@@ -21,5 +26,16 @@ public class SomeController {
         return affairFeign.test1("id");
     }
 
+    @PostMapping(value = "/workorders/{workorderCode}/applyers")
+    public String updateWorkorderById(@RequestBody ApplyVo applyVo,@PathVariable("workorderCode")long workorderCode)  {
+        String mark="id";
+        return someService.updateWorkorderById(applyVo,workorderCode,mark);
+    }
+
+    @GetMapping(value = "/workorders/{workorderCode}/forms")
+    public String getWorkorderFormById(@PathVariable("workorderCode")long workderId)  {
+        String mark="id";
+        return someService.getWorkorderFormById(workderId,mark);
+    }
 
 }

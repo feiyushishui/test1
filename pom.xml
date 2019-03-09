@@ -119,6 +119,10 @@
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-parameter-names</artifactId>
         </dependency>
+
+
+
+
     </dependencies>
 
     <!--spring-cloud依赖-->

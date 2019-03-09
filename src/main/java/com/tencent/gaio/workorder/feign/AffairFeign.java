@@ -1,10 +1,11 @@
 package com.tencent.gaio.workorder.feign;
 
+import com.tencent.gaio.commons.Constants;
+import com.tencent.gaio.workorder.vo.ApplyVo;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name= "${affair-apis:affair-apis}",url = "http://localhost:8083/",path = "/dict")
+@FeignClient(name= "${workorder-apis:workorder-apis}",url = "http://localhost:8081/",path = "/workorders")
 public interface AffairFeign {
 
     @GetMapping(value = "/test")
@@ -12,4 +13,20 @@ public interface AffairFeign {
 
     @GetMapping(value = "/test")
     String test1(@RequestParam("mark") String mark);
+
+    /**
+     * 更新申请人信息
+     * @param applyVo
+     * @return
+     */
+    @RequestMapping(value = "/{workorderCode}/applyers", method = RequestMethod.PUT,params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    String updateWorkorderById(@RequestBody ApplyVo applyVo, @PathVariable("workorderCode") long workorderCode,@RequestParam("mark") String mark);
+
+    /**
+     * 查询工单-表单
+     * @param workorderCode
+     * @return
+     */
+    @RequestMapping(value = "/{workorderCode}/forms", method = RequestMethod.GET)
+    String getWorkorderFormById(@PathVariable("workorderCode") long workorderCode,@RequestParam("mark") String mark);
 }
