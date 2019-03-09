@@ -28,6 +28,29 @@ public class ItemService implements IItemService{
         return itemFeign.page(map);
     }
 
+    @Override
+    public String itemMaterialListById(String itemTaskCode){
+        return itemFeign.itemMaterialListById(itemTaskCode);
+
+    }
+
+    @Override
+    public String itemMaterialListByCode(String itemTaskCode){
+        return itemFeign.itemMaterialListByCode(itemTaskCode);
+
+    }
+    @Override
+    public String queryConfigsById(String itemTaskCode){
+        return itemFeign.queryConfigsById(itemTaskCode);
+
+    }
+    @Override
+    public String queryConfigsByCode(String itemTaskCode){
+        return itemFeign.queryConfigsByCode(itemTaskCode);
+
+    }
+
+
 
 
 

@@ -16,4 +16,11 @@ public interface IItemService {
      */
     String page(String name,String taskCode);
 
+    String itemMaterialListById(String itemTaskCode);
+
+    String itemMaterialListByCode(String itemTaskCode);
+
+    String queryConfigsById(String itemTaskCode);
+
+    String queryConfigsByCode(String itemTaskCode);
 }
