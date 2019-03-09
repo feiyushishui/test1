@@ -3,6 +3,7 @@ package com.tencent.gaio.affair.controller;
 import com.tencent.gaio.affair.service.intf.IItemService;
 import com.tencent.gaio.commons.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -64,6 +65,7 @@ public class ItemController {
 
     /**
      * 根据事项实施编码code查询数据
+     *
      * @param itemTaskCode
      * @return
      */
@@ -74,6 +76,7 @@ public class ItemController {
 
     /**
      * 根据事项实施标识id查询数据
+     *
      * @param itemTaskCode
      * @return
      */

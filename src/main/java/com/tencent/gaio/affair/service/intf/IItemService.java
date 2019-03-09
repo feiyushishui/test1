@@ -1,6 +1,8 @@
 package com.tencent.gaio.affair.service.intf;
 
 
+import org.springframework.http.ResponseEntity;
+
 public interface IItemService {
 
     /**
