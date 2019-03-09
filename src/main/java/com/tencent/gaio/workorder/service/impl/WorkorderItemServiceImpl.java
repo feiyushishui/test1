@@ -27,4 +27,15 @@ public class WorkorderItemServiceImpl implements IWorkorderItemService {
     public ResponseEntity<WorkorderItem> findItemByWorkorderid(String workorderid) {
         return workorderFeign.findItemByWorkorderid(workorderid, "id");
     }
+
+    /**
+     * 通过工单code查询事项信息
+     *
+     * @param workorderCode
+     * @return
+     */
+    @Override
+    public ResponseEntity<WorkorderItem> findItemByWorkorderCode(String workorderCode) {
+        return workorderFeign.findItemByWorkorderCode(workorderCode, "code");
+    }
 }

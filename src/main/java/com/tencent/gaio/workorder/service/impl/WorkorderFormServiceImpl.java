@@ -1,10 +1,10 @@
 package com.tencent.gaio.workorder.service.impl;
 
 
-import com.tencent.gaio.workorder.vo.ApplyVo;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
+import com.tencent.gaio.workorder.vo.ApplyerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,13 +29,38 @@ public class WorkorderFormServiceImpl implements IWorkorderFormService {
         return workorderFeign.findByWorkorderid(workorderid, "id");
     }
 
+    /**
+     * 通过工单code查询表单
+     *
+     * @param workorderCode
+     * @return
+     */
     @Override
-    public String updateWorkorderById(ApplyVo applyVo, long id) {
-        return workorderFeign.updateWorkorderById(applyVo,id,"id");
+    public ResponseEntity findByWorkorderCode(String workorderCode) {
+        return workorderFeign.findByWorkorderCode(workorderCode, "code");
     }
 
+    /**
+     * 根据id更新工单-申请人信息
+     *
+     * @param applyVo
+     * @param id
+     * @return
+     */
     @Override
-    public String updateWorkorderByCode(ApplyVo applyVo, String workorderCode) {
-        return workorderFeign.updateWorkorderByCode(applyVo,workorderCode,"code");
+    public String updateWorkorderById(ApplyerVo applyVo, long id) {
+        return workorderFeign.updateWorkorderById(applyVo, id, "id");
+    }
+
+    /**
+     * 根据code更新工单-申请人信息
+     *
+     * @param applyVo
+     * @param workorderCode
+     * @return
+     */
+    @Override
+    public String updateWorkorderByCode(ApplyerVo applyVo, String workorderCode) {
+        return workorderFeign.updateWorkorderByCode(applyVo, workorderCode, "code");
     }
 }

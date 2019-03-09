@@ -43,4 +43,8 @@ public interface IItemService {
     String queryConfigsById(String itemTaskCode);
 
     String queryConfigsByCode(String itemTaskCode);
+
+    ResponseEntity queryItemByCode(String itemTaskCode);
+
+    ResponseEntity queryItemById(long itemTaskCode);
 }

@@ -1,5 +1,6 @@
 package com.tencent.gaio.affair.service.impl;
 
+import com.tencent.gaio.affair.domain.Item;
 import com.tencent.gaio.affair.feign.ItemFeign;
 import com.tencent.gaio.affair.service.intf.IItemService;
 import org.apache.commons.collections.MapUtils;
@@ -42,27 +43,48 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public String itemMaterialListById(String itemTaskCode){
+    public String itemMaterialListById(String itemTaskCode) {
         return itemFeign.itemMaterialListById(itemTaskCode);
 
     }
 
     @Override
-    public String itemMaterialListByCode(String itemTaskCode){
+    public String itemMaterialListByCode(String itemTaskCode) {
         return itemFeign.itemMaterialListByCode(itemTaskCode);
 
     }
+
     @Override
-    public String queryConfigsById(String itemTaskCode){
+    public String queryConfigsById(String itemTaskCode) {
         return itemFeign.queryConfigsById(itemTaskCode);
 
     }
+
     @Override
-    public String queryConfigsByCode(String itemTaskCode){
+    public String queryConfigsByCode(String itemTaskCode) {
         return itemFeign.queryConfigsByCode(itemTaskCode);
 
     }
 
+    /**
+     * 根据事项实施编码code查询数据
+     *
+     * @param itemTaskCode
+     * @return
+     */
+    @Override
+    public ResponseEntity<Item> queryItemByCode(String itemTaskCode) {
+        return itemFeign.queryItemByCode(itemTaskCode, "code");
+    }
 
-
+    /**
+     * 根据事项实施标识id查询数据
+     *
+     * @param itemTaskCode
+     * @return
+     */
+    @Override
+    public ResponseEntity<Item> queryItemById(long itemTaskCode) {
+        return itemFeign.queryItemById(itemTaskCode, "id");
+    }
 }
