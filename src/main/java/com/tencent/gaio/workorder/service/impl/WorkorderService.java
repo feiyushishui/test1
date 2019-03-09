@@ -1,5 +1,6 @@
 package com.tencent.gaio.workorder.service.impl;
 
+import com.tencent.gaio.commons.http.WrapperPage;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.IWorkorderService;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
@@ -7,12 +8,27 @@ import com.tencent.gaio.workorder.vo.WorkorderFormVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.Map;
 
 @Service
 public class WorkorderService implements IWorkorderService {
 
     @Autowired
     private WorkorderFeign workorderFeign;
+
+    /**
+     * 根据条件分页查询-工单草稿列表
+     * @param params
+     * @return
+     */
+    @Override
+    public WrapperPage workorderDraftPage(Map<String,Object> params){
+
+        return workorderFeign.workorderDraftPage(params);
+    }
 
     /**
      * 查询工单-申请人

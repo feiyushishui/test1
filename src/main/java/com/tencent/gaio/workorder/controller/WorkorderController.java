@@ -2,18 +2,28 @@ package com.tencent.gaio.workorder.controller;
 
 
 import com.tencent.gaio.commons.Constants;
+import com.tencent.gaio.commons.http.DataPage;
+import com.tencent.gaio.commons.http.WrapperPage;
+import com.tencent.gaio.commons.util.ParameterUtil;
+import com.tencent.gaio.workorder.service.IWorkorderService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderTraceService;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @RestController
 public class WorkorderController {
 
+    @Autowired
+    private IWorkorderService workorderService;
     @Autowired
     private IWorkorderFormService workorderFormService;
     @Autowired
@@ -22,6 +32,20 @@ public class WorkorderController {
     private IWorkorderItemService workorderItemService;
     @Autowired
     private IWorkorderTraceService workorderTraceService;
+
+
+    /**
+     * 根据条件分页查询-工单草稿列表
+     *
+     * 说明：固定参数  mark=page&state=0 (办件状态state（0：草稿；1：办理；2：完结；）)
+     * @return
+     */
+    @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=page","state=0"})
+    public ResponseEntity<WrapperPage> workorderDraft(HttpServletRequest request){
+        Map<String, Object> queryParams = ParameterUtil.wrapObjectMap(request.getParameterMap());
+        WrapperPage page = workorderService.workorderDraftPage(queryParams);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
+    }
 
     /**
      * 根据id查询工单-表单
