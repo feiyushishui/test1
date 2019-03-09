@@ -2,10 +2,9 @@ package com.tencent.gaio.workorder.domain;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tencent.gaio.commons.entity.AbstractAuditingEntity;
 
 
-public class WorkorderForm extends AbstractAuditingEntity {
+public class WorkorderForm {
     /**
      * 表单数据
      */
