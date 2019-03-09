@@ -20,7 +20,6 @@
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <microservicer-version>1.0.0</microservicer-version>
-        <gaio-core.version>0.0.1</gaio-core.version>
     </properties>
 
     <repositories>
@@ -32,11 +31,6 @@
     </repositories>
 
     <dependencies>
-        <dependency>
-            <groupId>com.tencent</groupId>
-            <artifactId>gaio-core</artifactId>
-            <version>${gaio-core.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.tencent</groupId>
             <artifactId>gaio-commons</artifactId>
@@ -134,18 +128,6 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2</version>
-        </dependency>
-
-        <!--不需要添加 Mybatis及Mybatis-Spring依赖，Mybatis-Plus会自动维护-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-annotation</artifactId>
-            <version>3.1.0</version>
         </dependency>
     </dependencies>
 
