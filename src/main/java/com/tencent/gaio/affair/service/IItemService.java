@@ -1,6 +1,10 @@
 package com.tencent.gaio.affair.service;
 
 
+import org.springframework.http.ResponseEntity;
+
+import java.util.Map;
+
 public interface IItemService {
 
     /**
@@ -15,5 +19,12 @@ public interface IItemService {
      * @return
      */
     String page(String name,String taskCode);
+
+    /**
+     * 根据条件查询事项基本信息
+     * @param queryParams
+     * @return
+     */
+    ResponseEntity findItem(Map<String,Object> queryParams);
 
 }

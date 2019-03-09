@@ -2,7 +2,9 @@ package com.tencent.gaio.affair.service.impl;
 
 import com.tencent.gaio.affair.feign.ItemFeign;
 import com.tencent.gaio.affair.service.IItemService;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +30,17 @@ public class ItemService implements IItemService{
         return itemFeign.page(map);
     }
 
-
+    /**
+     * 根据条件查询事项基本信息
+     * @param queryParams
+     * @return
+     */
+    @Override
+    public ResponseEntity findItem(Map<String,Object> queryParams){
+        Long id = MapUtils.getLong(queryParams,"id");
+        String mark = MapUtils.getString(queryParams,"mark");
+        return itemFeign.findItem(id ,mark);
+    }
 
 
 }

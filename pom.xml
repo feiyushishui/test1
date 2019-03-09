@@ -130,6 +130,23 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.45</version>
         </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2</version>
+        </dependency>
+
+        <!--不需要添加 Mybatis及Mybatis-Spring依赖，Mybatis-Plus会自动维护-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <version>3.1.0</version>
+        </dependency>
     </dependencies>
 
     <!--spring-cloud依赖-->
