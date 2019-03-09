@@ -1,7 +1,10 @@
 package com.tencent.gaio.workorder.feign;
 
-import com.tencent.gaio.workorder.vo.ApplyVo;
+import com.tencent.gaio.workorder.domain.WorkorderApplyer;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
+import com.tencent.gaio.workorder.domain.WorkorderItem;
+import com.tencent.gaio.workorder.domain.WorkorderTraces;
+import com.tencent.gaio.workorder.vo.ApplyVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,7 @@ public interface WorkorderFeign {
 
     /**
      * 查询工单-表单
+     *
      * @param workorderId
      * @param mark
      * @return
@@ -20,6 +24,7 @@ public interface WorkorderFeign {
 
     /**
      * 根据id更新申请人信息
+     *
      * @param applyVo
      * @param workorderCode
      * @param mark
@@ -30,6 +35,7 @@ public interface WorkorderFeign {
 
     /**
      * 根据code更新申请人信息
+     *
      * @param applyVo
      * @param workorderCode
      * @param mark
@@ -37,4 +43,15 @@ public interface WorkorderFeign {
      */
     @RequestMapping(value = "/workorders/{workorderCode}/applyers", method = RequestMethod.PUT)
     String updateWorkorderByCode(@RequestBody ApplyVo applyVo, @PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/applyers", method = RequestMethod.GET)
+    ResponseEntity<WorkorderApplyer> findApplyerByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/items", method = RequestMethod.GET)
+    ResponseEntity<WorkorderItem> findItemByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+
+
+    @RequestMapping(value = "/workorders/{workorderCode}/traces", method = RequestMethod.GET)
+    ResponseEntity<WorkorderTraces> findTracesByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+
 }
