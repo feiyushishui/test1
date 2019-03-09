@@ -1,6 +1,6 @@
-package com.tencent.gaio.workorder.entity;
+package com.tencent.gaio.workorder.domain;
 
-public class PersonEntity {
+public class Person {
     /**
      * 姓名
      */
@@ -30,7 +30,7 @@ public class PersonEntity {
      */
     private Long workorderId;
 
-    public PersonEntity() {
+    public Person() {
     }
 
     public String getName() {

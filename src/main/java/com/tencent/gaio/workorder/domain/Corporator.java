@@ -1,6 +1,6 @@
-package com.tencent.gaio.workorder.entity;
+package com.tencent.gaio.workorder.domain;
 
-public class CorporatorEntity {
+public class Corporator {
 
     /**
      * 统一社会信用代码
@@ -39,7 +39,7 @@ public class CorporatorEntity {
      */
     private Long workorderId;
 
-    public CorporatorEntity() {
+    public Corporator() {
     }
 
     public String getSocialCode() {

@@ -1,7 +1,7 @@
 package com.tencent.gaio.workorder.vo;
 
-import com.tencent.gaio.workorder.entity.CorporatorEntity;
-import com.tencent.gaio.workorder.entity.PersonEntity;
+import com.tencent.gaio.workorder.domain.Corporator;
+import com.tencent.gaio.workorder.domain.Person;
 
 
 /**
@@ -11,22 +11,25 @@ public class ApplyVo {
     // 办理人userId
     private String operatedBy;
 
-    private PersonEntity person;
-    private CorporatorEntity corporator;
+    private Person person;
+    private Corporator corporator;
 
-    public CorporatorEntity getCorporator() {
+    public ApplyVo() {
+    }
+
+    public Corporator getCorporator() {
         return corporator;
     }
 
-    public void setCorporator(CorporatorEntity corporator) {
+    public void setCorporator(Corporator corporator) {
         this.corporator = corporator;
     }
 
-    public PersonEntity getPerson() {
+    public Person getPerson() {
         return person;
     }
 
-    public void setPerson(PersonEntity person) {
+    public void setPerson(Person person) {
         this.person = person;
     }
 
