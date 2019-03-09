@@ -108,7 +108,7 @@ public class WorkorderController {
      * @param actInstId
      * @param claimVo
      */
-    @PutMapping(value = "/workorders/{workorderCode}/claim/{actInstId}", params = {"mark=id"})
+    @PutMapping(value = "/workorders/{workorderCode}/claim/{actInstId}", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity claimWorkOrder(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody ClaimVo claimVo) {
         return ResponseEntity.status(HttpStatus.OK).body(workorderService.claimWorkOrder(workorderId, actInstId, claimVo).intValue());
     }
@@ -119,7 +119,7 @@ public class WorkorderController {
      * @param workorderId
      * @return
      */
-    @GetMapping(value = "/workorders/{workorderCode}/opinions")
+    @GetMapping(value = "/workorders/{workorderCode}/opinions", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity getWorkorderComment(@PathVariable("workorderCode") String workorderId) {
         return ResponseEntity.status(HttpStatus.OK).body(workorderCommentService.getWorkorderComment(workorderId));
     }
@@ -131,7 +131,7 @@ public class WorkorderController {
      * @param taskDefKey
      * @return
      */
-    @PostMapping(value = "/workorders/{workorderCode}/{taskDefKey}/opinions", params = {"mark=id"})
+    @PostMapping(value = "/workorders/{workorderCode}/{taskDefKey}/opinions", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo) {
         return ResponseEntity.status(HttpStatus.OK).body(workorderCommentService.createWorkorderComment(workorderId, taskDefKey, commentVo).intValue());
     }

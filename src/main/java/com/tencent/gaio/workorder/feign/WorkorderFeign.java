@@ -69,7 +69,7 @@ public interface WorkorderFeign {
     ResponseEntity<Integer> claimWorkOrder(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody ClaimVo claimVo, @RequestParam("mark") String mark);
 
     @RequestMapping(value = "/workorders/{workorderCode}/opinions", method = RequestMethod.GET)
-    ResponseEntity<DataItem> getWorkorderComment(@PathVariable("workorderCode") String workorderId);
+    ResponseEntity<DataItem> getWorkorderComment(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
 
     @RequestMapping(value = "/workorders/{workorderCode}/{taskDefKey}/opinions", method = RequestMethod.POST)
     ResponseEntity<Integer> createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo, @RequestParam("mark") String mark);

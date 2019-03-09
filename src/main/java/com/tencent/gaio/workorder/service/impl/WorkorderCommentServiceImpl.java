@@ -24,6 +24,6 @@ public class WorkorderCommentServiceImpl implements IWorkorderCommentService {
 
     @Override
     public DataItem getWorkorderComment(String workorderId) {
-        return workorderFeign.getWorkorderComment(workorderId).getBody();
+        return workorderFeign.getWorkorderComment(workorderId, "id").getBody();
     }
 }
