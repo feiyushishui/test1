@@ -3,7 +3,6 @@ package com.tencent.gaio.affair.service.impl;
 import com.tencent.gaio.affair.domain.Item;
 import com.tencent.gaio.affair.feign.ItemFeign;
 import com.tencent.gaio.affair.service.intf.IItemService;
-import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,16 +29,6 @@ public class ItemService implements IItemService {
         map.put("taskCode", taskCode);
 
         return itemFeign.page(map);
-    }
-
-    @Override
-    public String findItemById(Long id){
-        return itemFeign.findItemById(id);
-    }
-
-    @Override
-    public String findItemByCode(String itemTaskCode){
-        return itemFeign.findItemByCode(itemTaskCode);
     }
 
     @Override

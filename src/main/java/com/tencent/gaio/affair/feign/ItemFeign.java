@@ -26,23 +26,6 @@ public interface ItemFeign {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     String page(@RequestParam Map<String, Object> map);
 
-
-    /**
-     * 根据事项id查询事项基本信息
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/{itemId}?mark=id", method = RequestMethod.GET)
-    String findItemById(@PathVariable("itemId") Long id);
-
-    /**
-     * 根据事项实施编码taskCode查询事项基本信息
-     * @param itemTaskCode
-     * @return
-     */
-    @RequestMapping(value = "/{itemTaskCode}?mark=code", method = RequestMethod.GET)
-    String findItemByCode(@PathVariable("itemTaskCode") String itemTaskCode);
-
     /**
      * 根据id查询接入事项-材料详细
      *

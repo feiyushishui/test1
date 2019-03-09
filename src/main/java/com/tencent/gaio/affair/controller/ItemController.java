@@ -24,26 +24,6 @@ public class ItemController {
     }
 
     /**
-     * 根据事项id查询事项信息
-     *
-     * @return
-     */
-    @RequestMapping(value = {"/{itemId}"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public String findItem(@PathVariable("itemId") Long id) {
-        return iItemService.findItemById(id);
-    }
-
-    /**
-     * 根据事项实施编码查询事项信息
-     *
-     * @return
-     */
-    @RequestMapping(value = {"/{itemTaskCode}"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
-    public String findItem(@PathVariable("itemTaskCode") String itemTaskCode) {
-        return iItemService.findItemByCode(itemTaskCode);
-    }
-
-    /**
      * 根据id查询接入事项-材料详细
      *
      * @return
