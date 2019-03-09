@@ -15,6 +15,9 @@ public class WorkorderForm {
     @JsonIgnore
     private Long workorderId;
 
+    public WorkorderForm() {
+    }
+
     public JSONObject getContent() {
         return content;
     }
