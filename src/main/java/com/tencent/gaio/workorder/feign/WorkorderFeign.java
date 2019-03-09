@@ -4,12 +4,22 @@ import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
+import com.tencent.gaio.workorder.vo.WorkorderVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "${workorder-apis:workorder-apis}", url = "http://localhost:8081")
 public interface WorkorderFeign {
+
+    /**
+     * 新建工单【确认】
+     * author luochaoqiang
+     *
+     * @param workorderVO
+     */
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    ResponseEntity create(@RequestBody WorkorderVO workorderVO);
 
     /**
      * 根据id查询工单-表单
@@ -129,5 +139,15 @@ public interface WorkorderFeign {
     @RequestMapping(value = "/{workorderCode}/forms", method = RequestMethod.PUT)
     String updateFormsByWorkorderId(@RequestBody WorkorderFormVo vo, @PathVariable("workorderCode") Long workorderId, @RequestParam("mark") String mark);
 
+    /**
+     * 新建工单-表单
+     *
+     * @param workorderFormVo
+     * @param workorderCode
+     * @param mark
+     * @return
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.POST)
+    void createWorkorderForm(@RequestBody WorkorderFormVo workorderFormVo, @PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
 }

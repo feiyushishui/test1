@@ -84,4 +84,9 @@ public class WorkorderFormServiceImpl implements IWorkorderFormService {
     public String updateFormsByWorkorderCode(WorkorderFormVo vo, String workorderCode) {
         return workorderFeign.updateFormsByWorkorderCode(vo, workorderCode, "code");
     }
+
+    @Override
+    public void createWorkorderForm(WorkorderFormVo workorderFormVo, String workorderCode, String mark) {
+        workorderFeign.createWorkorderForm(workorderFormVo, workorderCode, mark);
+    }
 }

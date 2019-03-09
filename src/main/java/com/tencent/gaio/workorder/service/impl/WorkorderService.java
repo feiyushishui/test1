@@ -4,6 +4,7 @@ import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.IWorkorderService;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
+import com.tencent.gaio.workorder.vo.WorkorderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,17 @@ public class WorkorderService implements IWorkorderService {
 
     @Autowired
     private WorkorderFeign workorderFeign;
+
+    /**
+     * 新建工单【确认】
+     * author luochaoqiang
+     *
+     * @param workorderVO
+     */
+    @Override
+    public ResponseEntity create(WorkorderVO workorderVO) {
+        return workorderFeign.create(workorderVO);
+    }
 
     /**
      * 查询工单-申请人

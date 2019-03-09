@@ -2,9 +2,18 @@ package com.tencent.gaio.workorder.service;
 
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
+import com.tencent.gaio.workorder.vo.WorkorderVO;
 import org.springframework.http.ResponseEntity;
 
 public interface IWorkorderService {
+
+    /**
+     * 新建工单【确认】
+     * author luochaoqiang
+     *
+     * @param workorderVO
+     */
+    ResponseEntity create(WorkorderVO workorderVO);
 
     /**
      * 查询工单-申请人

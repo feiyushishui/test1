@@ -2,12 +2,14 @@ package com.tencent.gaio.workorder.controller;
 
 
 import com.tencent.gaio.commons.Constants;
+import com.tencent.gaio.workorder.service.IWorkorderService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderTraceService;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
+import com.tencent.gaio.workorder.vo.WorkorderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,19 @@ public class WorkorderController {
     private IWorkorderItemService workorderItemService;
     @Autowired
     private IWorkorderTraceService workorderTraceService;
+    @Autowired
+    private IWorkorderService workorderService;
+
+    /**
+     * 新建工单【确认】
+     * author luochaoqiang
+     *
+     * @param workorderVO
+     */
+    @RequestMapping(value = "", method = {RequestMethod.POST})
+    public ResponseEntity create(@RequestBody WorkorderVO workorderVO) {
+        return workorderService.create(workorderVO);
+    }
 
     /**
      * 根据id查询工单-表单
@@ -126,6 +141,32 @@ public class WorkorderController {
     @GetMapping(value = "/workorders/{workorderCode}/traces", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
     public String getWorkorderTraceByCode(@PathVariable("workorderCode") String workorderCode) {
         return workorderTraceService.findTracesByWorkorderCode(workorderCode);
+    }
+
+    /**
+     * 通过工单id创建表单信息
+     *
+     * @param workorderFormVo
+     * @param workorderId
+     * @return
+     */
+    @PostMapping(value = "/workorders/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    public ResponseEntity<Void> createWorkorderFormById(@RequestBody WorkorderFormVo workorderFormVo, @PathVariable("workorderCode") String workorderId) {
+        workorderFormService.createWorkorderForm(workorderFormVo, workorderId, "id");
+        return ResponseEntity.ok().body(null);
+    }
+
+    /**
+     * 通过工单code创建表单信息
+     *
+     * @param workorderFormVo
+     * @param workorderCode
+     * @return
+     */
+    @PostMapping(value = "/workorders/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
+    public ResponseEntity<Void> createWorkorderFormByCode(@RequestBody WorkorderFormVo workorderFormVo, @PathVariable("workorderCode") String workorderCode) {
+        workorderFormService.createWorkorderForm(workorderFormVo, workorderCode, "code");
+        return ResponseEntity.ok().body(null);
     }
 
     /**

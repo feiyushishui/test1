@@ -49,6 +49,15 @@ public interface IWorkorderFormService {
     public String updateFormsByWorkorderId(WorkorderFormVo vo, Long workorderId);
 
     /**
+     * 通过工单code创建表单信息
+     *
+     * @param workorderFormVo
+     * @param workorderCode
+     * @return
+     */
+    void createWorkorderForm(WorkorderFormVo workorderFormVo, String workorderCode, String mark);
+
+    /**
      * 通过code更新工单-表单
      *
      * @param vo
