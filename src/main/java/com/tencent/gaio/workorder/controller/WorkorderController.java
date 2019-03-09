@@ -2,12 +2,12 @@ package com.tencent.gaio.workorder.controller;
 
 
 import com.tencent.gaio.commons.Constants;
-import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
-import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
-import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
-import com.tencent.gaio.workorder.service.intf.IWorkorderTraceService;
+import com.tencent.gaio.workorder.service.intf.*;
 import com.tencent.gaio.workorder.vo.ApplyVo;
+import com.tencent.gaio.workorder.vo.ClaimVo;
+import com.tencent.gaio.workorder.vo.CommentVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +22,10 @@ public class WorkorderController {
     private IWorkorderItemService workorderItemService;
     @Autowired
     private IWorkorderTraceService workorderTraceService;
+    @Autowired
+    private IWorkorderCommentService workorderCommentService;
+    @Autowired
+    private IWorkorderService workorderService;
 
     /**
      * 根据id查询工单-表单
@@ -95,5 +99,29 @@ public class WorkorderController {
     @GetMapping(value = "/workorders/{workorderCode}/traces", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity getWorkorderTraceById(@PathVariable("workorderCode") String workorderId) {
         return workorderTraceService.findTracesByWorkorderid(workorderId);
+    }
+
+    /**
+     * 工单认领
+     *
+     * @param workorderId
+     * @param actInstId
+     * @param claimVo
+     */
+    @PutMapping(value = "/workorders/{workorderCode}/claim/{actInstId}", params = {"mark=id"})
+    public ResponseEntity claimWorkOrder(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody ClaimVo claimVo) {
+        return ResponseEntity.status(HttpStatus.OK).body(workorderService.claimWorkOrder(workorderId, actInstId, claimVo).intValue());
+    }
+
+    /**
+     * 提交工单意见
+     *
+     * @param workorderId
+     * @param taskDefKey
+     * @return
+     */
+    @PostMapping(value = "/workorders/{workorderCode}/{taskDefKey}/opinions", params = {"mark=id"})
+    public ResponseEntity createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo) {
+        return ResponseEntity.status(HttpStatus.OK).body(workorderCommentService.createWorkorderComment(workorderId, taskDefKey, commentVo).intValue());
     }
 }
