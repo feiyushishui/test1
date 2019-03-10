@@ -21,7 +21,7 @@ public interface WorkorderFeign {
      * @param workorderVO
      */
     @RequestMapping(value = "/workorders", method = RequestMethod.POST)
-    ResponseEntity create(@RequestBody WorkorderVO workorderVO);
+    ResponseEntity<WorkorderEntity> create(@RequestBody WorkorderVO workorderVO);
 
     /**
      * 根据id查询工单-表单
