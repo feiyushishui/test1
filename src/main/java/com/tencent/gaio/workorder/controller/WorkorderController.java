@@ -2,7 +2,6 @@ package com.tencent.gaio.workorder.controller;
 
 
 import com.tencent.gaio.commons.Constants;
-import com.tencent.gaio.workorder.service.IWorkorderService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
@@ -10,12 +9,11 @@ import com.tencent.gaio.workorder.service.intf.IWorkorderTraceService;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
 import com.tencent.gaio.workorder.vo.WorkorderVO;
-import com.tencent.gaio.workorder.domain.WorkorderTrace;
 import com.tencent.gaio.workorder.service.intf.*;
-import com.tencent.gaio.workorder.vo.ApplyVo;
 import com.tencent.gaio.workorder.vo.CommentVo;
 import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +29,8 @@ public class WorkorderController {
     @Autowired
     private IWorkorderTraceService workorderTraceService;
     @Autowired
+    private IWorkorderCommentService workorderCommentService;
+    @Autowired
     private IWorkorderService workorderService;
 
     /**
@@ -43,10 +43,6 @@ public class WorkorderController {
     public ResponseEntity create(@RequestBody WorkorderVO workorderVO) {
         return workorderService.create(workorderVO);
     }
-    @Autowired
-    private IWorkorderCommentService workorderCommentService;
-    @Autowired
-    private IWorkorderService workorderService;
 
     /**
      * 根据id查询工单-表单
@@ -216,9 +212,12 @@ public class WorkorderController {
      * @param actInstId
      * @param taskActionReqVo
      */
-    @PutMapping(value = "/workorders/{workorderCode}/{actInstId}", params = {"claim=true"})
+    @PutMapping(value = "/workorders/{workorderCode}/{actInstId}", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity claimWorkOrder(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody TaskActionReqVo taskActionReqVo) {
         int num = workorderService.operateWorkorderByBpm(workorderId, actInstId, taskActionReqVo).intValue();
+        if(num > 0){
+            //int count = workorderTraceService
+        }
         return ResponseEntity.status(HttpStatus.OK).body(num);
     }
 
