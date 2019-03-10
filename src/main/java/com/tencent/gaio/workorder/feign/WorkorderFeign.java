@@ -2,6 +2,7 @@ package com.tencent.gaio.workorder.feign;
 
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
+import com.tencent.gaio.workorder.domain.Workorder;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
@@ -20,8 +21,8 @@ public interface WorkorderFeign {
      *
      * @param workorderVO
      */
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    ResponseEntity create(@RequestBody WorkorderVO workorderVO);
+    @RequestMapping(value = "/workorders", method = RequestMethod.POST)
+    ResponseEntity<Workorder> create(@RequestBody WorkorderVO workorderVO);
 
     /**
      * 根据id查询工单-表单
