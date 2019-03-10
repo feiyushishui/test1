@@ -194,6 +194,12 @@ public class WorkorderController {
         return workorderFormService.updateFormsByWorkorderCode(vo, workorderCode);
     }
 
+    /**
+     * 完成收件
+     * @param workorderCode
+     * @param mark
+     * @return
+     */
     @PutMapping(value = "/workorders/{workorderCode}/tasks")
     public ResponseEntity submitWorkorderTask(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark) {
         int reval = workorderFormService.submitWorkorderTask(workorderCode, mark);

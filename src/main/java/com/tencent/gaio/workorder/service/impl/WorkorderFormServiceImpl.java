@@ -154,7 +154,7 @@ public class WorkorderFormServiceImpl implements IWorkorderFormService {
         workorderEntity.setProcInstId(processInstanceId);
         //TODO 状态，参考那十张表状态，联系人胜锋
         workorderEntity.setState("1");
-        ResponseEntity workResEntitiy = workorderFeign.updateWorkorder(workorderEntity, workorderCode, "code");
+        ResponseEntity workResEntitiy = workorderFeign.updateWorkorder(workorderEntity, workorderCode, "id");
         if (workResEntitiy.getStatusCode().value() != 200) {
             return 1;
         }
