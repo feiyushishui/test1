@@ -2,7 +2,6 @@ package com.tencent.gaio.workorder.controller;
 
 
 import com.tencent.gaio.commons.Constants;
-import com.tencent.gaio.workorder.service.IWorkorderService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
@@ -10,7 +9,11 @@ import com.tencent.gaio.workorder.service.intf.IWorkorderTraceService;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
 import com.tencent.gaio.workorder.vo.WorkorderVO;
+import com.tencent.gaio.workorder.service.intf.*;
+import com.tencent.gaio.workorder.vo.CommentVo;
+import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +28,8 @@ public class WorkorderController {
     private IWorkorderItemService workorderItemService;
     @Autowired
     private IWorkorderTraceService workorderTraceService;
+    @Autowired
+    private IWorkorderCommentService workorderCommentService;
     @Autowired
     private IWorkorderService workorderService;
 
@@ -204,5 +209,44 @@ public class WorkorderController {
     public ResponseEntity submitWorkorderTask(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark) {
         int reval = workorderFormService.submitWorkorderTask(workorderCode, mark);
         return ResponseEntity.ok().body(reval);
+    }
+
+    /**
+     * 工单认领
+     *
+     * @param workorderId
+     * @param actInstId
+     * @param taskActionReqVo
+     */
+    @PutMapping(value = "/workorders/{workorderCode}/{actInstId}", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    public ResponseEntity claimWorkOrder(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody TaskActionReqVo taskActionReqVo) {
+        int num = workorderService.operateWorkorderByBpm(workorderId, actInstId, taskActionReqVo).intValue();
+        if(num > 0){
+            //int count = workorderTraceService
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(num);
+    }
+
+    /**
+     * 查询工单意见
+     *
+     * @param workorderId
+     * @return
+     */
+    @GetMapping(value = "/workorders/{workorderCode}/opinions", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    public ResponseEntity getWorkorderComment(@PathVariable("workorderCode") String workorderId) {
+        return ResponseEntity.status(HttpStatus.OK).body(workorderCommentService.getWorkorderComment(workorderId));
+    }
+
+    /**
+     * 提交工单意见
+     *
+     * @param workorderId
+     * @param taskDefKey
+     * @return
+     */
+    @PostMapping(value = "/workorders/{workorderCode}/{taskDefKey}/opinions", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    public ResponseEntity createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo) {
+        return ResponseEntity.status(HttpStatus.OK).body(workorderCommentService.createWorkorderComment(workorderId, taskDefKey, commentVo).intValue());
     }
 }

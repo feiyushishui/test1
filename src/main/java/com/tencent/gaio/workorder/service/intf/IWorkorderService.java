@@ -1,7 +1,8 @@
-package com.tencent.gaio.workorder.service;
+package com.tencent.gaio.workorder.service.intf;
 
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
+import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
 import com.tencent.gaio.workorder.vo.WorkorderVO;
 import org.springframework.http.ResponseEntity;
@@ -41,5 +42,13 @@ public interface IWorkorderService {
      * @return
      */
     String updateFormsByWorkorderCode(WorkorderFormVo vo, String workorderCode);
-
+    /**
+     * 工单操作（认领、提交、代理、代理提交）
+     *
+     * @param workorderid
+     * @param actInstId
+     * @param taskActionReqVo
+     * @return
+     */
+    Integer operateWorkorderByBpm(String workorderid, String actInstId, TaskActionReqVo taskActionReqVo);
 }
