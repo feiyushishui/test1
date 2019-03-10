@@ -1,5 +1,7 @@
 package com.tencent.gaio.workorder.feign;
 
+import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
+import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
@@ -149,5 +151,30 @@ public interface WorkorderFeign {
      */
     @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.POST)
     void createWorkorderForm(@RequestBody WorkorderFormVo workorderFormVo, @PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+
+    /**
+     * 查询工单-事项信息
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}/items", method = RequestMethod.GET)
+    ResponseEntity<WorkorderItem> getWorkorderItem(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+
+    /**
+     * 更新工单：工单收件
+     *
+     * @param workorderCode
+     * @param vo
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}", method = RequestMethod.PUT)
+    ResponseEntity updateWorkorder(@RequestBody WorkorderEntity vo, @PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+
+
+    /**
+     * 新建工单痕迹
+     *
+     * @param wte
+     * @return
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}/traces", method = RequestMethod.PUT)
+    ResponseEntity createTrace(@RequestBody WorkorderTraceEntity wte, @PathVariable("workorderCode") Long workorderCode, @RequestParam("mark") String mark);
 
 }

@@ -34,7 +34,7 @@ public class WorkorderController {
      *
      * @param workorderVO
      */
-    @RequestMapping(value = "", method = {RequestMethod.POST})
+    @RequestMapping(value = "/workorders", method = {RequestMethod.POST})
     public ResponseEntity create(@RequestBody WorkorderVO workorderVO) {
         return workorderService.create(workorderVO);
     }
@@ -192,5 +192,11 @@ public class WorkorderController {
     public String updateFormsByWorkorderCode(@RequestBody WorkorderFormVo vo, @PathVariable("workorderCode") String workorderCode) {
 
         return workorderFormService.updateFormsByWorkorderCode(vo, workorderCode);
+    }
+
+    @PutMapping(value = "/workorders/{workorderCode}/tasks")
+    public ResponseEntity submitWorkorderTask(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark) {
+        int reval = workorderFormService.submitWorkorderTask(workorderCode, mark);
+        return ResponseEntity.ok().body(reval);
     }
 }

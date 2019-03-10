@@ -64,4 +64,12 @@ public interface IWorkorderFormService {
      * @return
      */
     public String updateFormsByWorkorderCode(WorkorderFormVo vo, String workorderCode);
+
+    /**
+     * 通过工单标识/流水号完成表单提交，并启动工单流程实例
+     *
+     * @param workorderCode
+     * @return
+     */
+    int submitWorkorderTask(String workorderCode, String mark);
 }
