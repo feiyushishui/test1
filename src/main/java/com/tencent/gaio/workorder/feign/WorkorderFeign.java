@@ -2,11 +2,17 @@ package com.tencent.gaio.workorder.feign;
 
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
+import com.tencent.gaio.commons.http.DataItem;
+import com.tencent.gaio.workorder.domain.WorkorderApplyer;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
 import com.tencent.gaio.workorder.vo.WorkorderVO;
+import com.tencent.gaio.workorder.domain.WorkorderTraces;
+import com.tencent.gaio.workorder.vo.ApplyVo;
+import com.tencent.gaio.workorder.vo.CommentVo;
+import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -176,5 +182,14 @@ public interface WorkorderFeign {
      */
     @RequestMapping(value = "/workorders/{workorderCode}/traces", method = RequestMethod.PUT)
     ResponseEntity createTrace(@RequestBody WorkorderTraceEntity wte, @PathVariable("workorderCode") Long workorderCode, @RequestParam("mark") String mark);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/{actInstId}", method = RequestMethod.PUT)
+    ResponseEntity<Integer> operateWorkorderByBpm(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody TaskActionReqVo taskActionReqVo);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/opinions", method = RequestMethod.GET)
+    ResponseEntity<DataItem> getWorkorderComment(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/{taskDefKey}/opinions", method = RequestMethod.POST)
+    ResponseEntity<Integer> createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo, @RequestParam("mark") String mark);
 
 }
