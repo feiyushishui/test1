@@ -20,7 +20,7 @@ public interface WorkorderFeign {
      *
      * @param workorderVO
      */
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/workorders", method = RequestMethod.POST)
     ResponseEntity create(@RequestBody WorkorderVO workorderVO);
 
     /**
