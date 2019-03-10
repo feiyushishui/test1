@@ -6,8 +6,8 @@ import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.domain.WorkorderTraces;
 import com.tencent.gaio.workorder.vo.ApplyVo;
-import com.tencent.gaio.workorder.vo.ClaimVo;
 import com.tencent.gaio.workorder.vo.CommentVo;
+import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -65,8 +65,8 @@ public interface WorkorderFeign {
     @RequestMapping(value = "/workorders/{workorderCode}/traces", method = RequestMethod.GET)
     ResponseEntity<WorkorderTraces> findTracesByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
 
-    @RequestMapping(value = "/workorders/{workorderCode}/claim/{actInstId}", method = RequestMethod.PUT)
-    ResponseEntity<Integer> claimWorkOrder(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody ClaimVo claimVo, @RequestParam("mark") String mark);
+    @RequestMapping(value = "/workorders/{workorderCode}/{actInstId}", method = RequestMethod.PUT)
+    ResponseEntity<Integer> operateWorkorderByBpm(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody TaskActionReqVo taskActionReqVo);
 
     @RequestMapping(value = "/workorders/{workorderCode}/opinions", method = RequestMethod.GET)
     ResponseEntity<DataItem> getWorkorderComment(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);

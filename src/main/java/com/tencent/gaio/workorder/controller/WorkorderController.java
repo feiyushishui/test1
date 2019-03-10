@@ -2,10 +2,11 @@ package com.tencent.gaio.workorder.controller;
 
 
 import com.tencent.gaio.commons.Constants;
+import com.tencent.gaio.workorder.domain.WorkorderTrace;
 import com.tencent.gaio.workorder.service.intf.*;
 import com.tencent.gaio.workorder.vo.ApplyVo;
-import com.tencent.gaio.workorder.vo.ClaimVo;
 import com.tencent.gaio.workorder.vo.CommentVo;
+import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -106,11 +107,12 @@ public class WorkorderController {
      *
      * @param workorderId
      * @param actInstId
-     * @param claimVo
+     * @param taskActionReqVo
      */
-    @PutMapping(value = "/workorders/{workorderCode}/claim/{actInstId}", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public ResponseEntity claimWorkOrder(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody ClaimVo claimVo) {
-        return ResponseEntity.status(HttpStatus.OK).body(workorderService.claimWorkOrder(workorderId, actInstId, claimVo).intValue());
+    @PutMapping(value = "/workorders/{workorderCode}/{actInstId}", params = {"claim=true"})
+    public ResponseEntity claimWorkOrder(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody TaskActionReqVo taskActionReqVo) {
+        int num = workorderService.operateWorkorderByBpm(workorderId, actInstId, taskActionReqVo).intValue();
+        return ResponseEntity.status(HttpStatus.OK).body(num);
     }
 
     /**

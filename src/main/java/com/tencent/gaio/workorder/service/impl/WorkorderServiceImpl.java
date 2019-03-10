@@ -3,10 +3,8 @@ package com.tencent.gaio.workorder.service.impl;
 
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderService;
-import com.tencent.gaio.workorder.service.intf.IWorkorderTraceService;
-import com.tencent.gaio.workorder.vo.ClaimVo;
+import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,8 +16,16 @@ public class WorkorderServiceImpl implements IWorkorderService {
     @Autowired
     private WorkorderFeign workorderFeign;
 
+    /**
+     * 工单操作（认领、提交、代理、代理提交）
+     *
+     * @param workorderid
+     * @param actInstId
+     * @param taskActionReqVo
+     * @return
+     */
     @Override
-    public Integer claimWorkOrder(String workorderid, String actInstId, ClaimVo claimVo) {
-        return workorderFeign.claimWorkOrder(workorderid, actInstId, claimVo, "id").getBody();
+    public Integer operateWorkorderByBpm(String workorderid, String actInstId, TaskActionReqVo taskActionReqVo) {
+        return workorderFeign.operateWorkorderByBpm(workorderid, actInstId, taskActionReqVo).getBody();
     }
 }
