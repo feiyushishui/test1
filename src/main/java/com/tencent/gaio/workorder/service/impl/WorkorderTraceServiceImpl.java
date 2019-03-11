@@ -3,6 +3,7 @@ package com.tencent.gaio.workorder.service.impl;
 
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderTraceService;
+import com.tencent.gaio.workorder.vo.WorkorderTraceVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,10 @@ public class WorkorderTraceServiceImpl implements IWorkorderTraceService {
     @Override
     public String findTracesByWorkorderCode(String workorderCode) {
         return workorderFeign.findTracesByWorkorderCode(workorderCode, "code");
+    }
+
+    @Override
+    public Integer updateWorkorderTrace(String workorderId, String actInstId, WorkorderTraceVo workorderTraceVo) {
+        return workorderFeign.updateWorkorderTrace(workorderId, actInstId, workorderTraceVo, "id").getBody();
     }
 }
