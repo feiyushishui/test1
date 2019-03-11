@@ -1,6 +1,8 @@
 package com.tencent.gaio.workorder.service.intf;
 
+import com.tencent.gaio.workorder.vo.WorkorderTraceVo;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 
 public interface IWorkorderTraceService {
 
@@ -18,4 +20,8 @@ public interface IWorkorderTraceService {
      * @return
      */
     String findTracesByWorkorderCode(String workorderCode);
+
+    Integer updateWorkorderTrace(String workorderId, String actInstId, WorkorderTraceVo workorderTraceVo);
+
+
 }

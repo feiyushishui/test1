@@ -6,16 +6,14 @@ import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderTraceService;
-import com.tencent.gaio.workorder.vo.ApplyerVo;
-import com.tencent.gaio.workorder.vo.WorkorderFormVo;
-import com.tencent.gaio.workorder.vo.WorkorderVO;
+import com.tencent.gaio.workorder.vo.*;
 import com.tencent.gaio.workorder.service.intf.*;
-import com.tencent.gaio.workorder.vo.CommentVo;
-import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 public class WorkorderController {
@@ -214,11 +212,17 @@ public class WorkorderController {
      */
     @PutMapping(value = "/workorders/{workorderCode}/{actInstId}", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity claimWorkOrder(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody TaskActionReqVo taskActionReqVo) {
+        //认领操作
         int num = workorderService.operateWorkorderByBpm(workorderId, actInstId, taskActionReqVo).intValue();
+        int count = 0;
         if(num > 0){
-            //int count = workorderTraceService
+            WorkorderTraceVo workorderTraceVo = new WorkorderTraceVo();
+            workorderTraceVo.setAssignBy(taskActionReqVo.getAssignee());
+            workorderTraceVo.setAssignAt(new Date());
+            //认领成功更新工单轨迹认领信息
+            count = workorderTraceService.updateWorkorderTrace(workorderId, actInstId, workorderTraceVo);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(num);
+        return ResponseEntity.status(HttpStatus.OK).body(count);
     }
 
     /**
