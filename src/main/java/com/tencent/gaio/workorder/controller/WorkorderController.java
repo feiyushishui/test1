@@ -1,11 +1,9 @@
 package com.tencent.gaio.workorder.controller;
 
-
 import com.tencent.gaio.commons.Constants;
-import com.tencent.gaio.commons.http.DataPage;
 import com.tencent.gaio.commons.http.WrapperPage;
 import com.tencent.gaio.commons.util.ParameterUtil;
-import com.tencent.gaio.workorder.service.IWorkorderService;
+import com.tencent.gaio.workorder.service.intf.IWorkorderService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
@@ -27,8 +25,6 @@ import java.util.Map;
 @RestController
 public class WorkorderController {
 
-    @Autowired
-    private IWorkorderService workorderService;
     @Autowired
     private IWorkorderFormService workorderFormService;
     @Autowired

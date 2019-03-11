@@ -2,7 +2,6 @@ package com.tencent.gaio.workorder.service.impl;
 
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
 import com.tencent.gaio.commons.http.WrapperPage;
-import com.tencent.gaio.commons.http.WrapperPage;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderService;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
@@ -12,9 +11,6 @@ import com.tencent.gaio.workorder.vo.WorkorderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Map;
 
