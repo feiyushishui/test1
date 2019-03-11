@@ -1,6 +1,8 @@
 package com.tencent.gaio.workorder.controller;
 
 
+import com.tencent.gaio.apis.workorder.entity.WorkorderMaterialEntity;
+import com.tencent.gaio.apis.workorder.vo.WorkorderMaterialVo;
 import com.tencent.gaio.commons.Constants;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
@@ -30,6 +32,8 @@ public class WorkorderController {
     private IWorkorderTraceService workorderTraceService;
     @Autowired
     private IWorkorderCommentService workorderCommentService;
+    @Autowired
+    private IWorkorderMaterialService workorderMaterialService;
     @Autowired
     private IWorkorderService workorderService;
 
@@ -249,4 +253,18 @@ public class WorkorderController {
     public ResponseEntity createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo) {
         return ResponseEntity.status(HttpStatus.OK).body(workorderCommentService.createWorkorderComment(workorderId, taskDefKey, commentVo).intValue());
     }
+
+    /**
+     * 提交工单-上传材料
+     *
+     * @param workorderId
+     * @return
+     */
+    @PostMapping(value = "/workorders/{workorderCode}/materials", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    public ResponseEntity createWorkorderMaterialById(@PathVariable("workorderCode") String workorderId, @RequestBody WorkorderMaterialVo materialVo) {
+        return ResponseEntity.status(HttpStatus.OK).body(workorderMaterialService.createWorkorderMaterialById(workorderId,materialVo).intValue());
+    }
+
+
+
 }
