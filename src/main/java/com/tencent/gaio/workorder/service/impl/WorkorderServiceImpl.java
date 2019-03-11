@@ -1,20 +1,28 @@
 package com.tencent.gaio.workorder.service.impl;
 
+import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
+import com.tencent.gaio.commons.http.WrapperPage;
 import com.tencent.gaio.commons.http.WrapperPage;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
-import com.tencent.gaio.workorder.service.IWorkorderService;
+import com.tencent.gaio.workorder.service.intf.IWorkorderService;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
+import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
+import com.tencent.gaio.workorder.vo.WorkorderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Map;
 
+/**
+ * 工单服务接口实现类
+ */
 @Service
-public class WorkorderService implements IWorkorderService {
+public class WorkorderServiceImpl implements IWorkorderService {
 
     @Autowired
     private WorkorderFeign workorderFeign;
@@ -28,6 +36,17 @@ public class WorkorderService implements IWorkorderService {
     public WrapperPage workorderDraftPage(Map<String,Object> params){
 
         return workorderFeign.workorderDraftPage(params);
+    }
+
+    /**
+     * 新建工单【确认】
+     * author luochaoqiang
+     *
+     * @param workorderVO
+     */
+    @Override
+    public ResponseEntity<WorkorderEntity> create(WorkorderVO workorderVO) {
+        return workorderFeign.create(workorderVO);
     }
 
     /**
@@ -66,4 +85,16 @@ public class WorkorderService implements IWorkorderService {
     }
 
 
+    /**
+     * 工单操作（认领、提交、代理、代理提交）
+     *
+     * @param workorderid
+     * @param actInstId
+     * @param taskActionReqVo
+     * @return
+     */
+    @Override
+    public Integer operateWorkorderByBpm(String workorderid, String actInstId, TaskActionReqVo taskActionReqVo) {
+        return workorderFeign.operateWorkorderByBpm(workorderid, actInstId, taskActionReqVo).getBody();
+    }
 }

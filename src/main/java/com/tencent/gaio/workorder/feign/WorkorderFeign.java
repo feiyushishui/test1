@@ -1,10 +1,17 @@
 package com.tencent.gaio.workorder.feign;
 
 import com.tencent.gaio.commons.http.WrapperPage;
+import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
+import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
+import com.tencent.gaio.commons.http.DataItem;
+import com.tencent.gaio.commons.http.WrapperPage;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
+import com.tencent.gaio.workorder.vo.WorkorderVO;
+import com.tencent.gaio.workorder.vo.CommentVo;
+import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +27,16 @@ public interface WorkorderFeign {
      */
     @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET)
     WrapperPage workorderDraftPage(@RequestParam Map<String,Object> map);
+
+
+    /**
+     * 新建工单【确认】
+     * author luochaoqiang
+     *
+     * @param workorderVO
+     */
+    @RequestMapping(value = "/workorders", method = RequestMethod.POST)
+    ResponseEntity<WorkorderEntity> create(@RequestBody WorkorderVO workorderVO);
 
     /**
      * 根据id查询工单-表单
@@ -139,5 +156,49 @@ public interface WorkorderFeign {
     @RequestMapping(value = "/{workorderCode}/forms", method = RequestMethod.PUT)
     String updateFormsByWorkorderId(@RequestBody WorkorderFormVo vo, @PathVariable("workorderCode") Long workorderId, @RequestParam("mark") String mark);
 
+    /**
+     * 新建工单-表单
+     *
+     * @param workorderFormVo
+     * @param workorderCode
+     * @param mark
+     * @return
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.POST)
+    void createWorkorderForm(@RequestBody WorkorderFormVo workorderFormVo, @PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+
+    /**
+     * 查询工单-事项信息
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}/items", method = RequestMethod.GET)
+    ResponseEntity<WorkorderItem> getWorkorderItem(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+
+    /**
+     * 更新工单：工单收件
+     *
+     * @param workorderCode
+     * @param vo
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}", method = RequestMethod.PUT)
+    ResponseEntity updateWorkorder(@RequestBody WorkorderEntity vo, @PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+
+
+    /**
+     * 新建工单痕迹
+     *
+     * @param wte
+     * @return
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}/traces", method = RequestMethod.PUT)
+    ResponseEntity createTrace(@RequestBody WorkorderTraceEntity wte, @PathVariable("workorderCode") Long workorderCode, @RequestParam("mark") String mark);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/{actInstId}", method = RequestMethod.PUT)
+    ResponseEntity<Integer> operateWorkorderByBpm(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody TaskActionReqVo taskActionReqVo);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/opinions", method = RequestMethod.GET)
+    ResponseEntity<DataItem> getWorkorderComment(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+
+    @RequestMapping(value = "/workorders/{workorderCode}/{taskDefKey}/opinions", method = RequestMethod.POST)
+    ResponseEntity<Integer> createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo, @RequestParam("mark") String mark);
 
 }
