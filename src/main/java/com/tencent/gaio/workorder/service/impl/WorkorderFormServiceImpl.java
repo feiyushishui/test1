@@ -129,10 +129,9 @@ public class WorkorderFormServiceImpl implements IWorkorderFormService {
 
         // step No.2 获取事项流程配置
         String itemTaskCode = workorderItemEntity.getTaskCode();
-        ResponseEntity<ItemProcVo> procsResEntity = itemFeign.queryProcs(itemTaskCode);
+        ItemProcVo procs = itemFeign.queryProcs(itemTaskCode);
 
         // step No.3 启动流程实例 返回实例ID
-        ItemProcVo procs = procsResEntity.getBody();
         Map variables = new HashMap();
         List<ProcConfigEntity> list = procs.getConfig();
         for (ProcConfigEntity procConfigEntity : list) {

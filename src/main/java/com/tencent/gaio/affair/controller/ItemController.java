@@ -15,11 +15,6 @@ public class ItemController {
     @Autowired
     private IItemService iItemService;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test() {
-        return iItemService.test();
-    }
-
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String page(@RequestParam String name, @RequestParam String taskCode) {
         return iItemService.page(name, taskCode);

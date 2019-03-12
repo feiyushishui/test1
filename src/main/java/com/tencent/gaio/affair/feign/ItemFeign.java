@@ -1,10 +1,8 @@
 package com.tencent.gaio.affair.feign;
 
-import com.tencent.gaio.affair.domain.Item;
 import com.tencent.gaio.apis.affair.domain.ItemProcVo;
 import com.tencent.gaio.apis.affair.entity.ItemEntity;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,9 +12,6 @@ import java.util.Map;
 
 @FeignClient(name = "${affair-apis:affair-apis}", url = "http://localhost:8080", path = "/items")
 public interface ItemFeign {
-
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    String test();
 
     /**
      * 根据条件分页查询事项列表
@@ -81,5 +76,5 @@ public interface ItemFeign {
     ItemEntity queryItemById(@PathVariable("itemTaskCode") long itemTaskCode, @RequestParam("mark") String mark);
 
     @RequestMapping(value = "/{itemTaskCode}/procs", method = RequestMethod.GET)
-    ResponseEntity<ItemProcVo> queryProcs(@PathVariable("itemTaskCode") String itemTaskCode);
+    ItemProcVo queryProcs(@PathVariable("itemTaskCode") String itemTaskCode);
 }

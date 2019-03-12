@@ -16,11 +16,6 @@ public class ItemService implements IItemService {
     private ItemFeign itemFeign;
 
     @Override
-    public String test() {
-        return itemFeign.test();
-    }
-
-    @Override
     public String page(String name, String taskCode) {
         Map<String, Object> map = new HashMap<>();
         map.put("name", name);
