@@ -2,6 +2,7 @@ package com.tencent.gaio.workorder.feign;
 
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
+import com.tencent.gaio.apis.workorder.vo.WorkorderMaterialVo;
 import com.tencent.gaio.commons.http.DataItem;
 import com.tencent.gaio.commons.http.DataPage;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
@@ -233,7 +234,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/materials", method = RequestMethod.POST)
-    ResponseEntity<Integer> createWorkorderMaterialById(@PathVariable("workorderCode") String workorderId,@RequestBody WorkorderMaterialVo materialVo, @RequestParam("mark") String mark);
+    ResponseEntity<Integer> createWorkorderMaterialById(@PathVariable("workorderCode") String workorderId, @RequestBody WorkorderMaterialVo materialVo, @RequestParam("mark") String mark);
 
     /**
      * 新建工单-上传材料
@@ -244,6 +245,6 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/materials", method = RequestMethod.POST)
-    ResponseEntity<Integer> createWorkorderMaterialByCode(@PathVariable("workorderCode") String workorderCode,@RequestBody WorkorderMaterialVo materialVo,  @RequestParam("mark") String mark);
+    ResponseEntity<Integer> createWorkorderMaterialByCode(@PathVariable("workorderCode") String workorderCode, @RequestBody WorkorderMaterialVo materialVo, @RequestParam("mark") String mark);
 
 }

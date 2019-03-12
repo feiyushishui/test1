@@ -1,7 +1,6 @@
 package com.tencent.gaio.workorder.controller;
 
 
-import com.tencent.gaio.apis.workorder.entity.WorkorderMaterialEntity;
 import com.tencent.gaio.apis.workorder.vo.WorkorderMaterialVo;
 import com.tencent.gaio.commons.Constants;
 import com.tencent.gaio.commons.http.DataPage;
@@ -291,9 +290,7 @@ public class WorkorderController {
      */
     @PostMapping(value = "/workorders/{workorderCode}/materials", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity createWorkorderMaterialById(@PathVariable("workorderCode") String workorderId, @RequestBody WorkorderMaterialVo materialVo) {
-        return ResponseEntity.status(HttpStatus.OK).body(workorderMaterialService.createWorkorderMaterialById(workorderId,materialVo).intValue());
+        return ResponseEntity.status(HttpStatus.OK).body(workorderMaterialService.createWorkorderMaterialById(workorderId, materialVo).intValue());
     }
-
-
 
 }
