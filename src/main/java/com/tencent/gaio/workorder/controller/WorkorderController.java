@@ -2,6 +2,7 @@ package com.tencent.gaio.workorder.controller;
 
 
 import com.tencent.gaio.commons.Constants;
+import com.tencent.gaio.commons.util.ParameterUtil;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
@@ -13,7 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Map;
 
 @RestController
 public class WorkorderController {
@@ -40,6 +43,19 @@ public class WorkorderController {
     @RequestMapping(value = "/workorders", method = {RequestMethod.POST})
     public ResponseEntity create(@RequestBody WorkorderVO workorderVO) {
         return workorderService.create(workorderVO);
+    }
+
+    /**
+     * 根据条件分页查询-工单草稿列表
+     *
+     * 说明：固定参数  mark=page&state=0 (办件状态state（0：草稿；1：办理；2：完结；）)
+     * @return
+     */
+    @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=page","state=0"})
+    public ResponseEntity<WrapperPage> workorderDraft(HttpServletRequest request){
+        Map<String, Object> queryParams = ParameterUtil.wrapObjectMap(request.getParameterMap());
+        WrapperPage page = workorderService.workorderDraftPage(queryParams);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
     /**

@@ -2,7 +2,6 @@ package com.tencent.gaio.workorder.feign;
 
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
-import com.tencent.gaio.commons.Constants;
 import com.tencent.gaio.commons.http.DataItem;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
@@ -11,10 +10,18 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.util.Map;
 
 @FeignClient(name = "${workorder-apis:workorder-apis}", url = "http://localhost:8081")
 public interface WorkorderFeign {
+
+    /**
+     * 根据条件分页查询-工单草稿列表
+     *
+     * @return
+     */
+    @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET)
+    WrapperPage workorderDraftPage(@RequestParam Map<String, Object> map);
 
     /**
      * 新建工单【确认】
