@@ -4,6 +4,7 @@ import com.tencent.gaio.apis.affair.domain.ItemProcVo;
 import com.tencent.gaio.apis.affair.entity.ItemConfigEntity;
 import com.tencent.gaio.apis.affair.entity.ItemEntity;
 import com.tencent.gaio.commons.http.DataList;
+import com.tencent.gaio.commons.http.DataPage;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ public interface ItemFeign {
      * @return
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    String page(@RequestParam Map<String, Object> map);
+    DataPage page(@RequestParam Map<String, Object> map);
 
     /**
      * 根据id查询接入事项-材料详细

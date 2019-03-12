@@ -12,7 +12,7 @@ public interface IItemService {
      *
      * @return
      */
-    String page(String name, String taskCode);
+    DataPage page(Map<String,Object> map);
 
     DataList itemMaterialListById(String itemTaskCode);
 

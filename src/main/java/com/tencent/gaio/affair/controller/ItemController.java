@@ -5,10 +5,15 @@ import com.tencent.gaio.apis.affair.entity.ItemConfigEntity;
 import com.tencent.gaio.apis.affair.entity.ItemEntity;
 import com.tencent.gaio.commons.Constants;
 import com.tencent.gaio.commons.http.DataList;
+import com.tencent.gaio.commons.http.DataPage;
 import com.tencent.gaio.commons.http.ResultModel;
+import com.tencent.gaio.commons.util.ParameterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = {"/items"})
@@ -17,9 +22,18 @@ public class ItemController {
     @Autowired
     private IItemService iItemService;
 
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public String page(@RequestParam String name, @RequestParam String taskCode) {
-        return iItemService.page(name, taskCode);
+    /**
+     * 查询接入事项列表-分页查询
+     * @author zouwei
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=page"})
+    public ResultModel<DataPage> page(HttpServletRequest request) {
+        Map<String, Object> queryParams = ParameterUtil.wrapObjectMap(request.getParameterMap());
+        DataPage data = iItemService.page(queryParams);
+        ResultModel resultModel = new ResultModel(data);
+        return  resultModel;
     }
 
     /**
@@ -65,7 +79,7 @@ public class ItemController {
 
     /**
      * 根据事项实施编码code查询数据
-     *
+     * @author wangheng
      * @param itemTaskCode
      * @return
      */
@@ -76,7 +90,7 @@ public class ItemController {
 
     /**
      * 根据事项实施标识id查询数据
-     *
+     * @author wangheng
      * @param itemTaskCode
      * @return
      */

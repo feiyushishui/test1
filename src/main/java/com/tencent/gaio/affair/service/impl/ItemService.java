@@ -5,6 +5,7 @@ import com.tencent.gaio.affair.service.intf.IItemService;
 import com.tencent.gaio.apis.affair.entity.ItemConfigEntity;
 import com.tencent.gaio.apis.affair.entity.ItemEntity;
 import com.tencent.gaio.commons.http.DataList;
+import com.tencent.gaio.commons.http.DataPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,7 @@ public class ItemService implements IItemService {
     private ItemFeign itemFeign;
 
     @Override
-    public String page(String name, String taskCode) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", name);
-        map.put("mark", "page");
-        map.put("taskCode", taskCode);
-
+    public DataPage page(Map<String,Object> map) {
         return itemFeign.page(map);
     }
 
