@@ -1,7 +1,7 @@
 package com.tencent.gaio.affair.service.intf;
 
 
-import org.springframework.http.ResponseEntity;
+import com.tencent.gaio.apis.affair.entity.ItemEntity;
 
 public interface IItemService {
 
@@ -28,7 +28,7 @@ public interface IItemService {
 
     String queryConfigsByCode(String itemTaskCode);
 
-    ResponseEntity queryItemByCode(String itemTaskCode);
+    ItemEntity queryItemByCode(String itemTaskCode);
 
-    ResponseEntity queryItemById(long itemTaskCode);
+    ItemEntity queryItemById(long itemTaskCode);
 }

@@ -1,11 +1,11 @@
 package com.tencent.gaio.workorder.feign;
 
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
+import com.tencent.gaio.apis.workorder.entity.WorkorderFormEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
 import com.tencent.gaio.apis.workorder.vo.WorkorderMaterialVo;
 import com.tencent.gaio.commons.http.DataItem;
 import com.tencent.gaio.commons.http.DataPage;
-import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.vo.*;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -42,7 +42,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.GET)
-    ResponseEntity<WorkorderForm> findByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+    WorkorderFormEntity findByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
 
     /**
      * 根据code查询工单-表单
@@ -52,7 +52,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.GET)
-    ResponseEntity<WorkorderForm> findByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+    WorkorderFormEntity findByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
 
     /**

@@ -1,6 +1,7 @@
 package com.tencent.gaio.affair.controller;
 
 import com.tencent.gaio.affair.service.intf.IItemService;
+import com.tencent.gaio.apis.affair.entity.ItemEntity;
 import com.tencent.gaio.commons.Constants;
 import com.tencent.gaio.commons.http.ResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,10 +72,8 @@ public class ItemController {
      * @return
      */
     @GetMapping(value = "/{itemTaskCode}", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
-    public ResultModel queryItemByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
-        ResponseEntity responseEntity = iItemService.queryItemByCode(itemTaskCode);
-        ResultModel resultModel = new ResultModel(responseEntity);
-        return resultModel;
+    public ResponseEntity<ResultModel<ItemEntity>> queryItemByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
+        return ResponseEntity.ok().body(new ResultModel<>(iItemService.queryItemByCode(itemTaskCode)));
     }
 
     /**
@@ -84,9 +83,7 @@ public class ItemController {
      * @return
      */
     @GetMapping(value = "/{itemTaskCode}", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public ResultModel queryItemById(@PathVariable("itemTaskCode") long itemTaskCode) {
-        ResponseEntity responseEntity = iItemService.queryItemById(itemTaskCode);
-        ResultModel resultModel = new ResultModel(responseEntity);
-        return resultModel;
+    public ResponseEntity<ResultModel<ItemEntity>> queryItemById(@PathVariable("itemTaskCode") long itemTaskCode) {
+        return ResponseEntity.ok().body(new ResultModel<>(iItemService.queryItemById(itemTaskCode)));
     }
 }

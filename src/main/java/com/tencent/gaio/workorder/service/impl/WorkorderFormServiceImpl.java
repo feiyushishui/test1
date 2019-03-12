@@ -8,8 +8,8 @@ import com.tencent.gaio.apis.bpm.vo.ProcessInstanceReqVo;
 import com.tencent.gaio.apis.bpm.vo.ProcessInstanceRspVo;
 import com.tencent.gaio.apis.bpm.vo.ProcessInstanceVo;
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
+import com.tencent.gaio.apis.workorder.entity.WorkorderFormEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
-import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.feign.ProcessInstanceFeign;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
@@ -44,7 +44,7 @@ public class WorkorderFormServiceImpl implements IWorkorderFormService {
      * @return
      */
     @Override
-    public ResponseEntity<WorkorderForm> findByWorkorderid(String workorderid) {
+    public WorkorderFormEntity findByWorkorderid(String workorderid) {
         return workorderFeign.findByWorkorderid(workorderid, "id");
     }
 
@@ -55,7 +55,7 @@ public class WorkorderFormServiceImpl implements IWorkorderFormService {
      * @return
      */
     @Override
-    public ResponseEntity findByWorkorderCode(String workorderCode) {
+    public WorkorderFormEntity findByWorkorderCode(String workorderCode) {
         return workorderFeign.findByWorkorderCode(workorderCode, "code");
     }
 
