@@ -4,6 +4,9 @@ package com.tencent.gaio.affair.service.intf;
 import com.tencent.gaio.apis.affair.entity.ItemConfigEntity;
 import com.tencent.gaio.apis.affair.entity.ItemEntity;
 import com.tencent.gaio.commons.http.DataList;
+import com.tencent.gaio.commons.http.DataPage;
+
+import java.util.Map;
 
 public interface IItemService {
 
@@ -12,7 +15,7 @@ public interface IItemService {
      *
      * @return
      */
-    DataPage page(Map<String,Object> map);
+    DataPage page(Map<String, Object> map);
 
     DataList itemMaterialListById(String itemTaskCode);
 
