@@ -131,7 +131,7 @@ public interface WorkorderFeign {
      * @param vo
      * @return
      */
-    @RequestMapping(value = "/{workorderCode}/forms", method = RequestMethod.PUT)
+    @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.PUT)
     String updateFormsByWorkorderCode(@RequestBody WorkorderFormVo vo, @PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
 
@@ -141,7 +141,7 @@ public interface WorkorderFeign {
      * @param vo
      * @return
      */
-    @RequestMapping(value = "/{workorderCode}/forms", method = RequestMethod.PUT)
+    @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.PUT)
     String updateFormsByWorkorderId(@RequestBody WorkorderFormVo vo, @PathVariable("workorderCode") Long workorderId, @RequestParam("mark") String mark);
 
     /**
