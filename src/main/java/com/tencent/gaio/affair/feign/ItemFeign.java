@@ -29,7 +29,7 @@ public interface ItemFeign {
      * @return
      */
     @RequestMapping(value = "/{itemTaskCode}/materials?mark=id", method = RequestMethod.GET)
-    String itemMaterialListById(@PathVariable("itemTaskCode") String itemTaskCode);
+    DataList itemMaterialListById(@PathVariable("itemTaskCode") String itemTaskCode);
 
     /**
      * 根据code查询接入事项-材料详细
@@ -37,7 +37,7 @@ public interface ItemFeign {
      * @return
      */
     @RequestMapping(value = "/{itemTaskCode}/materials?mark=code", method = RequestMethod.GET)
-    String itemMaterialListByCode(@PathVariable("itemTaskCode") String itemTaskCode);
+    DataList itemMaterialListByCode(@PathVariable("itemTaskCode") String itemTaskCode);
 
     /**
      * 根据ID查询接入事项-流程配置
@@ -45,7 +45,7 @@ public interface ItemFeign {
      * @return
      */
     @RequestMapping(value = "/{itemTaskCode}/configs?mark=id", method = RequestMethod.GET)
-    String queryConfigsById(@PathVariable("itemTaskCode") String itemTaskCode);
+    ItemConfigEntity queryConfigsById(@PathVariable("itemTaskCode") String itemTaskCode);
 
     /**
      * 根据code查询接入事项-流程配置
@@ -53,7 +53,7 @@ public interface ItemFeign {
      * @return
      */
     @RequestMapping(value = "/{itemTaskCode}/configs?mark=code", method = RequestMethod.GET)
-    String queryConfigsByCode(@PathVariable("itemTaskCode") String itemTaskCode);
+    ItemConfigEntity queryConfigsByCode(@PathVariable("itemTaskCode") String itemTaskCode);
 
     /**
      * 根据事项实施编码code查询数据

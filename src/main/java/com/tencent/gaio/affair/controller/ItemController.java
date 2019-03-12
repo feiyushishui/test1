@@ -26,8 +26,8 @@ public class ItemController {
      * @return
      */
     @RequestMapping(value = {"/{itemTaskCode}/materials"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public String ItemMaterialListById(@PathVariable("itemTaskCode") String itemTaskCode) {
-        return iItemService.itemMaterialListById(itemTaskCode);
+    public ResponseEntity<ResultModel<DataList>> ItemMaterialListById(@PathVariable("itemTaskCode") String itemTaskCode) {
+        return ResponseEntity.ok().body(new ResultModel<>(iItemService.itemMaterialListById(itemTaskCode))) ;
     }
 
     /**
@@ -36,8 +36,8 @@ public class ItemController {
      * @return
      */
     @RequestMapping(value = {"/{itemTaskCode}/materials"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
-    public String ItemMaterialListByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
-        return iItemService.itemMaterialListByCode(itemTaskCode);
+    public ResponseEntity<ResultModel<DataList>> ItemMaterialListByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
+        return ResponseEntity.ok().body(new ResultModel<>(iItemService.itemMaterialListByCode(itemTaskCode))) ;
     }
 
     /**
@@ -46,8 +46,8 @@ public class ItemController {
      * @return
      */
     @RequestMapping(value = {"/{itemTaskCode}/configs"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public String queryConfigsById(@PathVariable("itemTaskCode") String itemTaskCode) {
-        return iItemService.queryConfigsById(itemTaskCode);
+    public ResponseEntity<ResultModel<ItemConfigEntity>> queryConfigsById(@PathVariable("itemTaskCode") String itemTaskCode) {
+       return ResponseEntity.ok().body(new ResultModel<>(iItemService.queryConfigsById(itemTaskCode))) ;
     }
 
     /**
@@ -56,8 +56,9 @@ public class ItemController {
      * @return
      */
     @RequestMapping(value = {"/{itemTaskCode}/configs"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
-    public String queryConfigsByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
-        return iItemService.queryConfigsByCode(itemTaskCode);
+    public ResponseEntity<ResultModel<ItemConfigEntity>> queryConfigsByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
+        return ResponseEntity.ok().body(new ResultModel<>(iItemService.queryConfigsByCode(itemTaskCode))) ;
+
     }
 
     /**
