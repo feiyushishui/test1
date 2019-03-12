@@ -64,7 +64,7 @@ public class WorkorderController {
 
     /**
      * 根据id查询工单-表单
-     *
+     * @author wangheng
      * @return
      */
     @GetMapping(value = "/workorders/{workorderCode}/forms")
@@ -74,7 +74,7 @@ public class WorkorderController {
 
     /**
      * 根据code查询工单-表单
-     *
+     * @author wangheng
      * @return
      */
     @GetMapping(value = "/workorders/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
@@ -84,7 +84,7 @@ public class WorkorderController {
 
     /**
      * 根据id更新工单-申请人
-     *
+     * @author wangheng
      * @param applyVo
      * @param workorderCode
      * @return
@@ -96,7 +96,7 @@ public class WorkorderController {
 
     /**
      * 根据code更新工单-申请人
-     *
+     * @author wangheng
      * @param applyVo
      * @param workorderCode
      * @return
@@ -108,7 +108,7 @@ public class WorkorderController {
 
     /**
      * 查询工单-申请人信息
-     *
+     * @author zouwei
      * @return
      */
     @GetMapping(value = "/workorders/{workorderCode}/applyers")
@@ -118,7 +118,7 @@ public class WorkorderController {
 
     /**
      * 查询工单-申请人信息:code
-     *
+     * @author zouwei
      * @return
      */
     @GetMapping(value = "/workorders/{workorderCode}/applyers", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
@@ -194,7 +194,7 @@ public class WorkorderController {
 
     /**
      * 通过id更新工单-表单
-     *
+     * @author zouwei
      * @param vo
      * @return
      */
@@ -207,7 +207,7 @@ public class WorkorderController {
 
     /**
      * 通过code更新工单-表单
-     *
+     * @author zouwei
      * @param vo
      * @return
      */
