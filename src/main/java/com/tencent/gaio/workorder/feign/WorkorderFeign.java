@@ -1,13 +1,13 @@
 package com.tencent.gaio.workorder.feign;
 
+import com.tencent.gaio.apis.bpm.vo.TaskActionReqVo;
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderFormEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
-import com.tencent.gaio.apis.workorder.vo.WorkorderMaterialVo;
+import com.tencent.gaio.apis.workorder.vo.*;
 import com.tencent.gaio.commons.http.DataItem;
 import com.tencent.gaio.commons.http.DataPage;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
-import com.tencent.gaio.workorder.vo.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +32,7 @@ public interface WorkorderFeign {
      * @param workorderVO
      */
     @RequestMapping(value = "/workorders", method = RequestMethod.POST)
-    ResponseEntity<WorkorderEntity> create(@RequestBody WorkorderVO workorderVO);
+    WorkorderEntity create(@RequestBody WorkorderVo workorderVO);
 
     /**
      * 根据id查询工单-表单
@@ -61,7 +61,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/applyers", method = RequestMethod.GET)
-    ResponseEntity<ApplyerVo> findApplyer(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+    ApplyerVo findApplyer(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
     /**
      * 根据id更新申请人信息
@@ -91,7 +91,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/applyers", method = RequestMethod.GET)
-    ResponseEntity<ApplyerVo> findApplyerByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+    ApplyerVo findApplyerByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
 
     /**
      * @param workorderCode
@@ -99,7 +99,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/applyers", method = RequestMethod.GET)
-    ResponseEntity<ApplyerVo> findApplyerByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+    ApplyerVo findApplyerByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
     /**
      * @param workorderId
@@ -107,15 +107,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/items", method = RequestMethod.GET)
-    ResponseEntity<WorkorderItem> findItemByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
-
-    /**
-     * @param workorderCode
-     * @param mark
-     * @return
-     */
-    @RequestMapping(value = "/workorders/{workorderCode}/items", method = RequestMethod.GET)
-    ResponseEntity<WorkorderItem> findItemByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+    WorkorderItem findItemByWorkorder(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
 
     /**
      * @param workorderId
@@ -167,7 +159,7 @@ public interface WorkorderFeign {
      * 查询工单-事项信息
      */
     @RequestMapping(value = "/workorders/{workorderCode}/items", method = RequestMethod.GET)
-    ResponseEntity<WorkorderItem> getWorkorderItem(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+    WorkorderItem getWorkorderItem(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
     /**
      * 更新工单：工单收件
@@ -197,7 +189,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/{actInstId}", method = RequestMethod.PUT)
-    ResponseEntity<Integer> operateWorkorderByBpm(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody TaskActionReqVo taskActionReqVo);
+    Integer operateWorkorderByBpm(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody TaskActionReqVo taskActionReqVo);
 
     /**
      * 根据id查询工单意见
@@ -206,7 +198,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/opinions", method = RequestMethod.GET)
-    ResponseEntity<DataItem> getWorkorderComment(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+    DataItem getWorkorderComment(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
 
     /**
      * 保存工单意见
@@ -217,7 +209,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/{taskDefKey}/opinions", method = RequestMethod.POST)
-    ResponseEntity<Integer> createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo, @RequestParam("mark") String mark);
+    Integer createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo, @RequestParam("mark") String mark);
 
     /**
      * 根据id更新轨迹信息
@@ -225,7 +217,7 @@ public interface WorkorderFeign {
      * @param workorderId
      */
     @RequestMapping(value = "/workorders/{workorderCode}/{actInstId}/traces", method = RequestMethod.PUT)
-    ResponseEntity<Integer> updateWorkorderTrace(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody WorkorderTraceVo workorderTraceVo, @RequestParam("mark") String mark);
+    Integer updateWorkorderTrace(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody WorkorderTraceVo workorderTraceVo, @RequestParam("mark") String mark);
 
     /**
      * 根据id更新工单-上传材料
@@ -234,7 +226,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/materials", method = RequestMethod.POST)
-    ResponseEntity<Integer> createWorkorderMaterialById(@PathVariable("workorderCode") String workorderId, @RequestBody WorkorderMaterialVo materialVo, @RequestParam("mark") String mark);
+    Integer createWorkorderMaterialById(@PathVariable("workorderCode") String workorderId, @RequestBody WorkorderMaterialVo materialVo, @RequestParam("mark") String mark);
 
     /**
      * 新建工单-上传材料
@@ -245,6 +237,6 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/materials", method = RequestMethod.POST)
-    ResponseEntity<Integer> createWorkorderMaterialByCode(@PathVariable("workorderCode") String workorderCode, @RequestBody WorkorderMaterialVo materialVo, @RequestParam("mark") String mark);
+    Integer createWorkorderMaterialByCode(@PathVariable("workorderCode") String workorderCode, @RequestBody WorkorderMaterialVo materialVo, @RequestParam("mark") String mark);
 
 }

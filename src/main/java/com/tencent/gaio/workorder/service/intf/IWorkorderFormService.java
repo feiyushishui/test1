@@ -1,8 +1,8 @@
 package com.tencent.gaio.workorder.service.intf;
 
 import com.tencent.gaio.apis.workorder.entity.WorkorderFormEntity;
-import com.tencent.gaio.workorder.vo.ApplyerVo;
-import com.tencent.gaio.workorder.vo.WorkorderFormVo;
+import com.tencent.gaio.apis.workorder.vo.ApplyerVo;
+import com.tencent.gaio.apis.workorder.vo.WorkorderFormVo;
 
 public interface IWorkorderFormService {
 

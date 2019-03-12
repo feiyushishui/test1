@@ -1,11 +1,10 @@
 package com.tencent.gaio.workorder.service.impl;
 
 
+import com.tencent.gaio.apis.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
-import com.tencent.gaio.workorder.vo.ApplyerVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,7 +23,7 @@ public class WorkorderApplyerServiceImpl implements IWorkorderApplyerService {
      * @return
      */
     @Override
-    public ResponseEntity<ApplyerVo> findApplyerByWorkorderid(String workorderid) {
+    public ApplyerVo findApplyerByWorkorderid(String workorderid) {
         return workorderFeign.findApplyerByWorkorderid(workorderid, "id");
     }
 
@@ -35,7 +34,7 @@ public class WorkorderApplyerServiceImpl implements IWorkorderApplyerService {
      * @return
      */
     @Override
-    public ResponseEntity<ApplyerVo> findApplyerByWorkorderCode(String workorderCode) {
+    public ApplyerVo findApplyerByWorkorderCode(String workorderCode) {
         return workorderFeign.findApplyerByWorkorderCode(workorderCode, "code");
     }
 

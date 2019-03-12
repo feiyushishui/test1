@@ -1,12 +1,11 @@
 package com.tencent.gaio.workorder.service.impl;
 
 
+import com.tencent.gaio.apis.workorder.vo.CommentVo;
 import com.tencent.gaio.commons.http.DataItem;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderCommentService;
-import com.tencent.gaio.workorder.vo.CommentVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,11 +18,11 @@ public class WorkorderCommentServiceImpl implements IWorkorderCommentService {
 
     @Override
     public Integer createWorkorderComment(String workorderId, String taskDefKey, CommentVo commentVo) {
-        return workorderFeign.createWorkorderComment(workorderId, taskDefKey, commentVo, "id").getBody();
+        return workorderFeign.createWorkorderComment(workorderId, taskDefKey, commentVo, "id");
     }
 
     @Override
     public DataItem getWorkorderComment(String workorderId) {
-        return workorderFeign.getWorkorderComment(workorderId, "id").getBody();
+        return workorderFeign.getWorkorderComment(workorderId, "id");
     }
 }

@@ -1,8 +1,6 @@
 package com.tencent.gaio.workorder.service.intf;
 
-import com.tencent.gaio.workorder.vo.WorkorderTraceVo;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.tencent.gaio.apis.workorder.vo.WorkorderTraceVo;
 
 public interface IWorkorderTraceService {
 
@@ -13,6 +11,7 @@ public interface IWorkorderTraceService {
      * @return
      */
     String findTracesByWorkorderid(String workorderid);
+
     /**
      * 通过工单code查询工单痕迹
      *

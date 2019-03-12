@@ -1,15 +1,14 @@
 package com.tencent.gaio.workorder.service.impl;
 
+import com.tencent.gaio.apis.bpm.vo.TaskActionReqVo;
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
+import com.tencent.gaio.apis.workorder.vo.ApplyerVo;
+import com.tencent.gaio.apis.workorder.vo.WorkorderFormVo;
+import com.tencent.gaio.apis.workorder.vo.WorkorderVo;
 import com.tencent.gaio.commons.http.DataPage;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderService;
-import com.tencent.gaio.workorder.vo.ApplyerVo;
-import com.tencent.gaio.workorder.vo.TaskActionReqVo;
-import com.tencent.gaio.workorder.vo.WorkorderFormVo;
-import com.tencent.gaio.workorder.vo.WorkorderVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -25,11 +24,12 @@ public class WorkorderServiceImpl implements IWorkorderService {
 
     /**
      * 根据条件分页查询-工单草稿列表
+     *
      * @param params
      * @return
      */
     @Override
-    public DataPage workorderDraftPage(Map<String,Object> params){
+    public DataPage workorderDraftPage(Map<String, Object> params) {
 
         return workorderFeign.workorderDraftPage(params);
     }
@@ -41,7 +41,7 @@ public class WorkorderServiceImpl implements IWorkorderService {
      * @param workorderVO
      */
     @Override
-    public ResponseEntity<WorkorderEntity> create(WorkorderVO workorderVO) {
+    public WorkorderEntity create(WorkorderVo workorderVO) {
         return workorderFeign.create(workorderVO);
     }
 
@@ -52,7 +52,7 @@ public class WorkorderServiceImpl implements IWorkorderService {
      * @return
      */
     @Override
-    public ResponseEntity<ApplyerVo> getApplyers(String workorderCodeOrId, String mark) {
+    public ApplyerVo getApplyers(String workorderCodeOrId, String mark) {
         return workorderFeign.findApplyer(workorderCodeOrId, mark);
     }
 
@@ -91,6 +91,6 @@ public class WorkorderServiceImpl implements IWorkorderService {
      */
     @Override
     public Integer operateWorkorderByBpm(String workorderid, String actInstId, TaskActionReqVo taskActionReqVo) {
-        return workorderFeign.operateWorkorderByBpm(workorderid, actInstId, taskActionReqVo).getBody();
+        return workorderFeign.operateWorkorderByBpm(workorderid, actInstId, taskActionReqVo);
     }
 }

@@ -10,12 +10,12 @@ import com.tencent.gaio.apis.bpm.vo.ProcessInstanceVo;
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderFormEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
+import com.tencent.gaio.apis.workorder.vo.ApplyerVo;
+import com.tencent.gaio.apis.workorder.vo.WorkorderFormVo;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.feign.ProcessInstanceFeign;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
-import com.tencent.gaio.workorder.vo.ApplyerVo;
-import com.tencent.gaio.workorder.vo.WorkorderFormVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -125,8 +125,7 @@ public class WorkorderFormServiceImpl implements IWorkorderFormService {
     public int submitWorkorderTask(String workorderCode, String mark) {
 
         // step No.1 获取事项
-        ResponseEntity<WorkorderItem> itemResEntity = workorderFeign.getWorkorderItem(workorderCode, mark);
-        WorkorderItem workorderItemEntity = itemResEntity.getBody();
+        WorkorderItem workorderItemEntity = workorderFeign.getWorkorderItem(workorderCode, mark);
 
         // step No.2 获取事项流程配置
         String itemTaskCode = workorderItemEntity.getTaskCode();

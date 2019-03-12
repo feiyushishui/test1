@@ -1,12 +1,11 @@
 package com.tencent.gaio.workorder.service.intf;
 
+import com.tencent.gaio.apis.bpm.vo.TaskActionReqVo;
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
+import com.tencent.gaio.apis.workorder.vo.ApplyerVo;
+import com.tencent.gaio.apis.workorder.vo.WorkorderFormVo;
+import com.tencent.gaio.apis.workorder.vo.WorkorderVo;
 import com.tencent.gaio.commons.http.DataPage;
-import com.tencent.gaio.workorder.vo.ApplyerVo;
-import com.tencent.gaio.workorder.vo.TaskActionReqVo;
-import com.tencent.gaio.workorder.vo.WorkorderFormVo;
-import com.tencent.gaio.workorder.vo.WorkorderVO;
-import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
 
@@ -14,18 +13,19 @@ public interface IWorkorderService {
 
     /**
      * 根据条件分页查询-工单草稿列表
+     *
      * @param params
      * @return
      */
-    DataPage workorderDraftPage(Map<String,Object> params);
+    DataPage workorderDraftPage(Map<String, Object> params);
 
     /**
      * 新建工单【确认】
      * author luochaoqiang
      *
-     * @param workorderVO
+     * @param workorderVo
      */
-    ResponseEntity<WorkorderEntity> create(WorkorderVO workorderVO);
+    WorkorderEntity create(WorkorderVo workorderVo);
 
     /**
      * 查询工单-申请人
@@ -33,7 +33,7 @@ public interface IWorkorderService {
      * @param
      * @return
      */
-    ResponseEntity<ApplyerVo> getApplyers(String workorderCodeOrId, String mark);
+    ApplyerVo getApplyers(String workorderCodeOrId, String mark);
 
 
     /**
@@ -52,6 +52,7 @@ public interface IWorkorderService {
      * @return
      */
     String updateFormsByWorkorderCode(WorkorderFormVo vo, String workorderCode);
+
     /**
      * 工单操作（认领、提交、代理、代理提交）
      *

@@ -5,7 +5,6 @@ import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,8 +23,8 @@ public class WorkorderItemServiceImpl implements IWorkorderItemService {
      * @return
      */
     @Override
-    public ResponseEntity<WorkorderItem> findItemByWorkorderid(String workorderid) {
-        return workorderFeign.findItemByWorkorderid(workorderid, "id");
+    public WorkorderItem findItemByWorkorderid(String workorderid) {
+        return workorderFeign.findItemByWorkorder(workorderid, "id");
     }
 
     /**
@@ -35,7 +34,7 @@ public class WorkorderItemServiceImpl implements IWorkorderItemService {
      * @return
      */
     @Override
-    public ResponseEntity<WorkorderItem> findItemByWorkorderCode(String workorderCode) {
-        return workorderFeign.findItemByWorkorderCode(workorderCode, "code");
+    public WorkorderItem findItemByWorkorderCode(String workorderCode) {
+        return workorderFeign.findItemByWorkorder(workorderCode, "code");
     }
 }

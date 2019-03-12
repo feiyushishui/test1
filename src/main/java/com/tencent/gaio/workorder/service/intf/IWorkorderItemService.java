@@ -1,6 +1,6 @@
 package com.tencent.gaio.workorder.service.intf;
 
-import org.springframework.http.ResponseEntity;
+import com.tencent.gaio.workorder.domain.WorkorderItem;
 
 public interface IWorkorderItemService {
     /**
@@ -9,8 +9,8 @@ public interface IWorkorderItemService {
      * @param workorderid
      * @return
      */
-    ResponseEntity findItemByWorkorderid(String workorderid);
+    WorkorderItem findItemByWorkorderid(String workorderid);
 
 
-    ResponseEntity findItemByWorkorderCode(String workorderCode);
+    WorkorderItem findItemByWorkorderCode(String workorderCode);
 }

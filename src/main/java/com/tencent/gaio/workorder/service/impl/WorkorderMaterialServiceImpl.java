@@ -15,10 +15,13 @@ public class WorkorderMaterialServiceImpl implements IWorkorderMaterialService {
     @Autowired
     private WorkorderFeign workorderFeign;
 
-    public Integer createWorkorderMaterialById(String workorderId,WorkorderMaterialVo vo){
-        return workorderFeign.createWorkorderMaterialById(workorderId,vo, "id").getBody();
+    @Override
+    public Integer createWorkorderMaterialById(String workorderId, WorkorderMaterialVo vo) {
+        return workorderFeign.createWorkorderMaterialById(workorderId, vo, "id");
     }
-    public Integer createWorkorderMaterialByCode(String workorderId,WorkorderMaterialVo vo){
-        return workorderFeign.createWorkorderMaterialByCode(workorderId,vo, "code").getBody();
+
+    @Override
+    public Integer createWorkorderMaterialByCode(String workorderId, WorkorderMaterialVo vo) {
+        return workorderFeign.createWorkorderMaterialByCode(workorderId, vo, "code");
     }
 }

@@ -1,6 +1,6 @@
 package com.tencent.gaio.workorder.service.intf;
 
-import org.springframework.http.ResponseEntity;
+import com.tencent.gaio.apis.workorder.vo.ApplyerVo;
 
 public interface IWorkorderApplyerService {
     /**
@@ -9,13 +9,14 @@ public interface IWorkorderApplyerService {
      * @param workorderid
      * @return
      */
-    ResponseEntity findApplyerByWorkorderid(String workorderid);
+    ApplyerVo findApplyerByWorkorderid(String workorderid);
+
     /**
      * 通过工单code查询基本信息
      *
      * @param workorderCode
      * @return
      */
-    ResponseEntity findApplyerByWorkorderCode(String workorderCode);
+    ApplyerVo findApplyerByWorkorderCode(String workorderCode);
 
 }
