@@ -54,11 +54,11 @@ public class WorkorderController {
      * @return
      */
     @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=page", "state=0"})
-    public ResultModel<DataPage> workorderDraft(HttpServletRequest request) {
+    public ResponseEntity<ResultModel<DataPage>> workorderDraft(HttpServletRequest request) {
         Map<String, Object> queryParams = ParameterUtil.wrapObjectMap(request.getParameterMap());
         DataPage data = workorderService.workorderDraftPage(queryParams);
         ResultModel resultModel = new ResultModel(data);
-        return resultModel;
+        return ResponseEntity.ok(resultModel);
     }
 
     /**
