@@ -8,7 +8,6 @@ import com.tencent.gaio.commons.Constants;
 import com.tencent.gaio.commons.http.DataPage;
 import com.tencent.gaio.commons.http.ResultModel;
 import com.tencent.gaio.commons.util.ParameterUtil;
-import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.service.intf.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -114,7 +113,7 @@ public class WorkorderController {
      */
     @GetMapping(value = "/workorders/{workorderCode}/applyers")
     public ResponseEntity<ResultModel<ApplyerVo>> getWorkorderApplyerById(@PathVariable("workorderCode") String workorderId) {
-        return  ResponseEntity.ok().body(new ResultModel<>( workorderApplyerService.findApplyerByWorkorderid(workorderId)));
+        return ResponseEntity.ok().body(new ResultModel<>(workorderApplyerService.findApplyerByWorkorderid(workorderId)));
     }
 
     /**
@@ -124,7 +123,7 @@ public class WorkorderController {
      */
     @GetMapping(value = "/workorders/{workorderCode}/applyers", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
     public ResponseEntity<ResultModel<ApplyerVo>> getWorkorderApplyerByCode(@PathVariable("workorderCode") String workorderCode) {
-        return ResponseEntity.ok().body(new ResultModel<>( workorderApplyerService.findApplyerByWorkorderCode(workorderCode)));
+        return ResponseEntity.ok().body(new ResultModel<>(workorderApplyerService.findApplyerByWorkorderCode(workorderCode)));
     }
 
     /**
@@ -134,7 +133,7 @@ public class WorkorderController {
      */
     @GetMapping(value = "/workorders/{workorderCode}/items", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity getWorkorderItemById(@PathVariable("workorderCode") String workorderId) {
-        return workorderItemService.findItemByWorkorderid(workorderId);
+        return ResponseEntity.ok().body(new ResultModel<>(workorderItemService.findItemByWorkorderid(workorderId)));
     }
 
     /**
@@ -149,7 +148,7 @@ public class WorkorderController {
      */
     @GetMapping(value = "/workorders/{workorderCode}/items", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
     public ResponseEntity getWorkorderItemByCode(@PathVariable("workorderCode") String workorderCode) {
-        return workorderItemService.findItemByWorkorderCode(workorderCode);
+        return ResponseEntity.ok().body(new ResultModel<>(workorderItemService.findItemByWorkorderCode(workorderCode)));
     }
 
     /**
@@ -158,8 +157,8 @@ public class WorkorderController {
      * @return
      */
     @GetMapping(value = "/workorders/{workorderCode}/traces", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public String getWorkorderTraceById(@PathVariable("workorderCode") String workorderId) {
-        return workorderTraceService.findTracesByWorkorderid(workorderId);
+    public ResponseEntity getWorkorderTraceById(@PathVariable("workorderCode") String workorderId) {
+        return ResponseEntity.ok().body(new ResultModel<>(workorderTraceService.findTracesByWorkorderid(workorderId)));
     }
 
     /**
@@ -168,8 +167,8 @@ public class WorkorderController {
      * @return
      */
     @GetMapping(value = "/workorders/{workorderCode}/traces", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
-    public String getWorkorderTraceByCode(@PathVariable("workorderCode") String workorderCode) {
-        return workorderTraceService.findTracesByWorkorderCode(workorderCode);
+    public ResponseEntity getWorkorderTraceByCode(@PathVariable("workorderCode") String workorderCode) {
+        return ResponseEntity.ok().body(new ResultModel<>(workorderTraceService.findTracesByWorkorderCode(workorderCode)));
     }
 
     /**
@@ -180,9 +179,9 @@ public class WorkorderController {
      * @return
      */
     @PostMapping(value = "/workorders/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public ResponseEntity<Void> createWorkorderFormById(@RequestBody WorkorderFormVo workorderFormVo, @PathVariable("workorderCode") String workorderId) {
+    public ResponseEntity createWorkorderFormById(@RequestBody WorkorderFormVo workorderFormVo, @PathVariable("workorderCode") String workorderId) {
         workorderFormService.createWorkorderForm(workorderFormVo, workorderId, "id");
-        return ResponseEntity.ok().body(null);
+        return ResponseEntity.ok().body(new ResultModel<>(null));
     }
 
     /**
@@ -193,9 +192,9 @@ public class WorkorderController {
      * @return
      */
     @PostMapping(value = "/workorders/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
-    public ResponseEntity<Void> createWorkorderFormByCode(@RequestBody WorkorderFormVo workorderFormVo, @PathVariable("workorderCode") String workorderCode) {
+    public ResponseEntity createWorkorderFormByCode(@RequestBody WorkorderFormVo workorderFormVo, @PathVariable("workorderCode") String workorderCode) {
         workorderFormService.createWorkorderForm(workorderFormVo, workorderCode, "code");
-        return ResponseEntity.ok().body(null);
+        return ResponseEntity.ok().body(new ResultModel<>(null));
     }
 
     /**
@@ -204,7 +203,7 @@ public class WorkorderController {
      * @param vo
      * @return
      */
-    @RequestMapping(value = "/workorders/{workorderCode}/forms",  method = RequestMethod.PUT)
+    @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.PUT)
     public ResponseEntity<ResultModel> updateFormsByWorkorderId(@RequestBody WorkorderFormVo vo, @PathVariable("workorderCode") Long workorderId) {
 
         return ResponseEntity.ok().body(new ResultModel<>(workorderFormService.updateFormsByWorkorderId(vo, workorderId)));
@@ -233,7 +232,7 @@ public class WorkorderController {
     @PutMapping(value = "/workorders/{workorderCode}/tasks")
     public ResponseEntity submitWorkorderTask(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark) {
         int reval = workorderFormService.submitWorkorderTask(workorderCode, mark);
-        return ResponseEntity.ok().body(reval);
+        return ResponseEntity.ok().body(new ResultModel<>(reval));
     }
 
     /**
@@ -255,7 +254,7 @@ public class WorkorderController {
             //认领成功更新工单轨迹认领信息
             count = workorderTraceService.updateWorkorderTrace(workorderId, actInstId, workorderTraceVo);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(count);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResultModel<>(count));
     }
 
     /**
@@ -266,7 +265,7 @@ public class WorkorderController {
      */
     @GetMapping(value = "/workorders/{workorderCode}/opinions", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity getWorkorderComment(@PathVariable("workorderCode") String workorderId) {
-        return ResponseEntity.status(HttpStatus.OK).body(workorderCommentService.getWorkorderComment(workorderId));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResultModel<>(workorderCommentService.getWorkorderComment(workorderId)));
     }
 
     /**
@@ -278,7 +277,7 @@ public class WorkorderController {
      */
     @PostMapping(value = "/workorders/{workorderCode}/{taskDefKey}/opinions", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity createWorkorderComment(@PathVariable("workorderCode") String workorderId, @PathVariable("taskDefKey") String taskDefKey, @RequestBody CommentVo commentVo) {
-        return ResponseEntity.status(HttpStatus.OK).body(workorderCommentService.createWorkorderComment(workorderId, taskDefKey, commentVo).intValue());
+        return ResponseEntity.status(HttpStatus.OK).body(new ResultModel<>(workorderCommentService.createWorkorderComment(workorderId, taskDefKey, commentVo).intValue()));
     }
 
     /**
@@ -289,7 +288,7 @@ public class WorkorderController {
      */
     @PostMapping(value = "/workorders/{workorderCode}/materials", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity createWorkorderMaterialById(@PathVariable("workorderCode") String workorderId, @RequestBody WorkorderMaterialVo materialVo) {
-        return ResponseEntity.status(HttpStatus.OK).body(workorderMaterialService.createWorkorderMaterialById(workorderId, materialVo).intValue());
+        return ResponseEntity.status(HttpStatus.OK).body(new ResultModel<>(workorderMaterialService.createWorkorderMaterialById(workorderId, materialVo).intValue()));
     }
 
 }
