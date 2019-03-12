@@ -226,5 +226,24 @@ public interface WorkorderFeign {
     @RequestMapping(value = "/workorders/{workorderCode}/{actInstId}/traces", method = RequestMethod.PUT)
     ResponseEntity<Integer> updateWorkorderTrace(@PathVariable("workorderCode") String workorderId, @PathVariable("actInstId") String actInstId, @RequestBody WorkorderTraceVo workorderTraceVo, @RequestParam("mark") String mark);
 
+    /**
+     * 根据id更新工单-上传材料
+     *
+     * @param materialVo
+     * @return
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}/materials", method = RequestMethod.POST)
+    ResponseEntity<Integer> createWorkorderMaterialById(@PathVariable("workorderCode") String workorderId,@RequestBody WorkorderMaterialVo materialVo, @RequestParam("mark") String mark);
+
+    /**
+     * 新建工单-上传材料
+     *
+     * @param materialVo
+     * @param workorderCode
+     * @param mark
+     * @return
+     */
+    @RequestMapping(value = "/workorders/{workorderCode}/materials", method = RequestMethod.POST)
+    ResponseEntity<Integer> createWorkorderMaterialByCode(@PathVariable("workorderCode") String workorderCode,@RequestBody WorkorderMaterialVo materialVo,  @RequestParam("mark") String mark);
 
 }
