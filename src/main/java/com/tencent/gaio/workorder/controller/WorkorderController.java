@@ -1,14 +1,11 @@
 package com.tencent.gaio.workorder.controller;
 
-
 import com.tencent.gaio.commons.Constants;
+import com.tencent.gaio.commons.http.DataPage;
+import com.tencent.gaio.commons.http.ResultModel;
 import com.tencent.gaio.commons.util.ParameterUtil;
-import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
-import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
-import com.tencent.gaio.workorder.service.intf.IWorkorderItemService;
-import com.tencent.gaio.workorder.service.intf.IWorkorderTraceService;
-import com.tencent.gaio.workorder.vo.*;
 import com.tencent.gaio.workorder.service.intf.*;
+import com.tencent.gaio.workorder.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,15 +44,17 @@ public class WorkorderController {
 
     /**
      * 根据条件分页查询-工单草稿列表
-     *
+     * <p>
      * 说明：固定参数  mark=page&state=0 (办件状态state（0：草稿；1：办理；2：完结；）)
+     *
      * @return
      */
-    @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=page","state=0"})
-    public ResponseEntity<WrapperPage> workorderDraft(HttpServletRequest request){
+    @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=page", "state=0"})
+    public ResultModel<DataPage> workorderDraft(HttpServletRequest request) {
         Map<String, Object> queryParams = ParameterUtil.wrapObjectMap(request.getParameterMap());
-        WrapperPage page = workorderService.workorderDraftPage(queryParams);
-        return ResponseEntity.status(HttpStatus.OK).body(page);
+        DataPage data = workorderService.workorderDraftPage(queryParams);
+        ResultModel resultModel = new ResultModel(data);
+        return resultModel;
     }
 
     /**
@@ -215,6 +214,7 @@ public class WorkorderController {
 
     /**
      * 完成收件
+     *
      * @param workorderCode
      * @param mark
      * @return
@@ -237,7 +237,7 @@ public class WorkorderController {
         //认领操作
         int num = workorderService.operateWorkorderByBpm(workorderId, actInstId, taskActionReqVo).intValue();
         int count = 0;
-        if(num > 0){
+        if (num > 0) {
             WorkorderTraceVo workorderTraceVo = new WorkorderTraceVo();
             workorderTraceVo.setAssignBy(taskActionReqVo.getAssignee());
             workorderTraceVo.setAssignAt(new Date());

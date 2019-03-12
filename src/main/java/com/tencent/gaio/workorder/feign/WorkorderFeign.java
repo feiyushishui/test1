@@ -3,6 +3,7 @@ package com.tencent.gaio.workorder.feign;
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
 import com.tencent.gaio.apis.workorder.entity.WorkorderTraceEntity;
 import com.tencent.gaio.commons.http.DataItem;
+import com.tencent.gaio.commons.http.DataPage;
 import com.tencent.gaio.workorder.domain.WorkorderForm;
 import com.tencent.gaio.workorder.domain.WorkorderItem;
 import com.tencent.gaio.workorder.vo.*;
@@ -21,7 +22,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET)
-    WrapperPage workorderDraftPage(@RequestParam Map<String, Object> map);
+    DataPage workorderDraftPage(@RequestParam Map<String, Object> map);
 
     /**
      * 新建工单【确认】

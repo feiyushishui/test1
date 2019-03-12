@@ -1,7 +1,7 @@
 package com.tencent.gaio.workorder.service.intf;
 
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
-import com.tencent.gaio.commons.http.WrapperPage;
+import com.tencent.gaio.commons.http.DataPage;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.vo.TaskActionReqVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
@@ -17,7 +17,7 @@ public interface IWorkorderService {
      * @param params
      * @return
      */
-    WrapperPage workorderDraftPage(Map<String,Object> params);
+    DataPage workorderDraftPage(Map<String,Object> params);
 
     /**
      * 新建工单【确认】
