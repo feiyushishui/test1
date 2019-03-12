@@ -3,6 +3,8 @@ package com.tencent.gaio.affair.service.impl;
 import com.tencent.gaio.affair.domain.Item;
 import com.tencent.gaio.affair.feign.ItemFeign;
 import com.tencent.gaio.affair.service.intf.IItemService;
+import com.tencent.gaio.apis.affair.entity.ItemConfigEntity;
+import com.tencent.gaio.commons.http.DataList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -32,25 +34,25 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public String itemMaterialListById(String itemTaskCode) {
+    public DataList itemMaterialListById(String itemTaskCode) {
         return itemFeign.itemMaterialListById(itemTaskCode);
 
     }
 
     @Override
-    public String itemMaterialListByCode(String itemTaskCode) {
+    public DataList itemMaterialListByCode(String itemTaskCode) {
         return itemFeign.itemMaterialListByCode(itemTaskCode);
 
     }
 
     @Override
-    public String queryConfigsById(String itemTaskCode) {
+    public ItemConfigEntity queryConfigsById(String itemTaskCode) {
         return itemFeign.queryConfigsById(itemTaskCode);
 
     }
 
     @Override
-    public String queryConfigsByCode(String itemTaskCode) {
+    public ItemConfigEntity queryConfigsByCode(String itemTaskCode) {
         return itemFeign.queryConfigsByCode(itemTaskCode);
 
     }

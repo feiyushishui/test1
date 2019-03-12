@@ -1,6 +1,8 @@
 package com.tencent.gaio.affair.service.intf;
 
 
+import com.tencent.gaio.apis.affair.entity.ItemConfigEntity;
+import com.tencent.gaio.commons.http.DataList;
 import org.springframework.http.ResponseEntity;
 
 public interface IItemService {
@@ -20,13 +22,13 @@ public interface IItemService {
      */
     String page(String name, String taskCode);
 
-    String itemMaterialListById(String itemTaskCode);
+    DataList itemMaterialListById(String itemTaskCode);
 
-    String itemMaterialListByCode(String itemTaskCode);
+    DataList itemMaterialListByCode(String itemTaskCode);
 
-    String queryConfigsById(String itemTaskCode);
+    ItemConfigEntity queryConfigsById(String itemTaskCode);
 
-    String queryConfigsByCode(String itemTaskCode);
+    ItemConfigEntity queryConfigsByCode(String itemTaskCode);
 
     ResponseEntity queryItemByCode(String itemTaskCode);
 
