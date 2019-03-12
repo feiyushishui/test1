@@ -1,7 +1,9 @@
 package com.tencent.gaio.affair.feign;
 
 import com.tencent.gaio.apis.affair.domain.ItemProcVo;
+import com.tencent.gaio.apis.affair.entity.ItemConfigEntity;
 import com.tencent.gaio.apis.affair.entity.ItemEntity;
+import com.tencent.gaio.commons.http.DataList;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

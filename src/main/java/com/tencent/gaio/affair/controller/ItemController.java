@@ -1,8 +1,10 @@
 package com.tencent.gaio.affair.controller;
 
 import com.tencent.gaio.affair.service.intf.IItemService;
+import com.tencent.gaio.apis.affair.entity.ItemConfigEntity;
 import com.tencent.gaio.apis.affair.entity.ItemEntity;
 import com.tencent.gaio.commons.Constants;
+import com.tencent.gaio.commons.http.DataList;
 import com.tencent.gaio.commons.http.ResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class ItemController {
      */
     @RequestMapping(value = {"/{itemTaskCode}/materials"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity<ResultModel<DataList>> ItemMaterialListById(@PathVariable("itemTaskCode") String itemTaskCode) {
-        return ResponseEntity.ok().body(new ResultModel<>(iItemService.itemMaterialListById(itemTaskCode))) ;
+        return ResponseEntity.ok().body(new ResultModel<>(iItemService.itemMaterialListById(itemTaskCode)));
     }
 
     /**
@@ -37,7 +39,7 @@ public class ItemController {
      */
     @RequestMapping(value = {"/{itemTaskCode}/materials"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
     public ResponseEntity<ResultModel<DataList>> ItemMaterialListByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
-        return ResponseEntity.ok().body(new ResultModel<>(iItemService.itemMaterialListByCode(itemTaskCode))) ;
+        return ResponseEntity.ok().body(new ResultModel<>(iItemService.itemMaterialListByCode(itemTaskCode)));
     }
 
     /**
@@ -47,7 +49,7 @@ public class ItemController {
      */
     @RequestMapping(value = {"/{itemTaskCode}/configs"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
     public ResponseEntity<ResultModel<ItemConfigEntity>> queryConfigsById(@PathVariable("itemTaskCode") String itemTaskCode) {
-       return ResponseEntity.ok().body(new ResultModel<>(iItemService.queryConfigsById(itemTaskCode))) ;
+        return ResponseEntity.ok().body(new ResultModel<>(iItemService.queryConfigsById(itemTaskCode)));
     }
 
     /**
@@ -57,7 +59,7 @@ public class ItemController {
      */
     @RequestMapping(value = {"/{itemTaskCode}/configs"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
     public ResponseEntity<ResultModel<ItemConfigEntity>> queryConfigsByCode(@PathVariable("itemTaskCode") String itemTaskCode) {
-        return ResponseEntity.ok().body(new ResultModel<>(iItemService.queryConfigsByCode(itemTaskCode))) ;
+        return ResponseEntity.ok().body(new ResultModel<>(iItemService.queryConfigsByCode(itemTaskCode)));
 
     }
 
