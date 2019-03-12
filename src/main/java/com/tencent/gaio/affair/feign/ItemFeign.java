@@ -2,6 +2,7 @@ package com.tencent.gaio.affair.feign;
 
 import com.tencent.gaio.affair.domain.Item;
 import com.tencent.gaio.apis.affair.domain.ItemProcVo;
+import com.tencent.gaio.apis.affair.entity.ItemEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,7 +68,7 @@ public interface ItemFeign {
      * @return
      */
     @RequestMapping(value = "/{itemTaskCode}", method = RequestMethod.GET)
-    ResponseEntity<Item> queryItemByCode(@PathVariable("itemTaskCode") String itemTaskCode, @RequestParam("mark") String mark);
+    ItemEntity queryItemByCode(@PathVariable("itemTaskCode") String itemTaskCode, @RequestParam("mark") String mark);
 
     /**
      * 根据事项实施标识id查询数据
@@ -77,7 +78,7 @@ public interface ItemFeign {
      * @return
      */
     @RequestMapping(value = "/{itemTaskCode}", method = RequestMethod.GET)
-    ResponseEntity<Item> queryItemById(@PathVariable("itemTaskCode") long itemTaskCode, @RequestParam("mark") String mark);
+    ItemEntity queryItemById(@PathVariable("itemTaskCode") long itemTaskCode, @RequestParam("mark") String mark);
 
     @RequestMapping(value = "/{itemTaskCode}/procs", method = RequestMethod.GET)
     ResponseEntity<ItemProcVo> queryProcs(@PathVariable("itemTaskCode") String itemTaskCode);

@@ -1,10 +1,9 @@
 package com.tencent.gaio.affair.service.impl;
 
-import com.tencent.gaio.affair.domain.Item;
 import com.tencent.gaio.affair.feign.ItemFeign;
 import com.tencent.gaio.affair.service.intf.IItemService;
+import com.tencent.gaio.apis.affair.entity.ItemEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -62,7 +61,7 @@ public class ItemService implements IItemService {
      * @return
      */
     @Override
-    public ResponseEntity<Item> queryItemByCode(String itemTaskCode) {
+    public ItemEntity queryItemByCode(String itemTaskCode) {
         return itemFeign.queryItemByCode(itemTaskCode, "code");
     }
 
@@ -73,7 +72,7 @@ public class ItemService implements IItemService {
      * @return
      */
     @Override
-    public ResponseEntity<Item> queryItemById(long itemTaskCode) {
+    public ItemEntity queryItemById(long itemTaskCode) {
         return itemFeign.queryItemById(itemTaskCode, "id");
     }
 }

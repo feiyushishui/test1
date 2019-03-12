@@ -1,8 +1,8 @@
 package com.tencent.gaio.workorder.service.intf;
 
+import com.tencent.gaio.apis.workorder.entity.WorkorderFormEntity;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
 import com.tencent.gaio.workorder.vo.WorkorderFormVo;
-import org.springframework.http.ResponseEntity;
 
 public interface IWorkorderFormService {
 
@@ -12,7 +12,7 @@ public interface IWorkorderFormService {
      * @param workorderid
      * @return
      */
-    ResponseEntity findByWorkorderid(String workorderid);
+    WorkorderFormEntity findByWorkorderid(String workorderid);
 
     /**
      * 通过工单id更新工单申请人信息
@@ -38,7 +38,7 @@ public interface IWorkorderFormService {
      * @param workorderCode
      * @return
      */
-    ResponseEntity findByWorkorderCode(String workorderCode);
+    WorkorderFormEntity findByWorkorderCode(String workorderCode);
 
     /**
      * 通过id更新工单-表单
