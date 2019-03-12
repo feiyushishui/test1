@@ -2,6 +2,8 @@ package com.tencent.gaio.workorder.controller;
 
 
 import com.tencent.gaio.commons.Constants;
+import com.tencent.gaio.commons.http.DataPage;
+import com.tencent.gaio.commons.http.ResultModel;
 import com.tencent.gaio.commons.util.ParameterUtil;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderFormService;
@@ -47,14 +49,15 @@ public class WorkorderController {
 
     /**
      * 根据条件分页查询-工单草稿列表
-     *
+     * <p>
      * 说明：固定参数  mark=page&state=0 (办件状态state（0：草稿；1：办理；2：完结；）)
+     *
      * @return
      */
-    @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=page","state=0"})
-    public ResponseEntity<WrapperPage> workorderDraft(HttpServletRequest request){
+    @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=page", "state=0"})
+    public ResponseEntity<DataPage> workorderDraft(HttpServletRequest request) {
         Map<String, Object> queryParams = ParameterUtil.wrapObjectMap(request.getParameterMap());
-        WrapperPage page = workorderService.workorderDraftPage(queryParams);
+        DataPage page = workorderService.workorderDraftPage(queryParams);
         return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
@@ -64,8 +67,10 @@ public class WorkorderController {
      * @return
      */
     @GetMapping(value = "/workorders/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public ResponseEntity getWorkorderFormById(@PathVariable("workorderCode") String workorderId) {
-        return workorderFormService.findByWorkorderid(workorderId);
+    public ResultModel getWorkorderFormById(@PathVariable("workorderCode") String workorderId) {
+        ResponseEntity responseEntity = workorderFormService.findByWorkorderid(workorderId);
+        ResultModel resultModel = new ResultModel(responseEntity);
+        return resultModel;
     }
 
     /**
@@ -74,8 +79,10 @@ public class WorkorderController {
      * @return
      */
     @GetMapping(value = "/workorders/{workorderCode}/forms", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
-    public ResponseEntity getWorkorderFormByCode(@PathVariable("workorderCode") String workorderCode) {
-        return workorderFormService.findByWorkorderCode(workorderCode);
+    public ResultModel getWorkorderFormByCode(@PathVariable("workorderCode") String workorderCode) {
+        ResponseEntity responseEntity = workorderFormService.findByWorkorderCode(workorderCode);
+        ResultModel resultModel = new ResultModel(responseEntity);
+        return resultModel;
     }
 
     /**
@@ -86,8 +93,10 @@ public class WorkorderController {
      * @return
      */
     @PostMapping(value = "/workorders/{workorderCode}/applyers", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
-    public String updateWorkorderById(@RequestBody ApplyerVo applyVo, @PathVariable("workorderCode") long workorderCode) {
-        return workorderFormService.updateWorkorderById(applyVo, workorderCode);
+    public ResultModel updateWorkorderById(@RequestBody ApplyerVo applyVo, @PathVariable("workorderCode") long workorderCode) {
+        String result = workorderFormService.updateWorkorderById(applyVo, workorderCode);
+        ResultModel resultModel = new ResultModel(result);
+        return resultModel;
     }
 
     /**
@@ -98,8 +107,10 @@ public class WorkorderController {
      * @return
      */
     @PostMapping(value = "/workorders/{workorderCode}/applyers", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
-    public String updateWorkorderByCode(@RequestBody ApplyerVo applyVo, @PathVariable("workorderCode") String workorderCode) {
-        return workorderFormService.updateWorkorderByCode(applyVo, workorderCode);
+    public ResultModel updateWorkorderByCode(@RequestBody ApplyerVo applyVo, @PathVariable("workorderCode") String workorderCode) {
+        String result = workorderFormService.updateWorkorderByCode(applyVo, workorderCode);
+        ResultModel resultModel = new ResultModel(result);
+        return resultModel;
     }
 
     /**
@@ -215,6 +226,7 @@ public class WorkorderController {
 
     /**
      * 完成收件
+     *
      * @param workorderCode
      * @param mark
      * @return
@@ -237,7 +249,7 @@ public class WorkorderController {
         //认领操作
         int num = workorderService.operateWorkorderByBpm(workorderId, actInstId, taskActionReqVo).intValue();
         int count = 0;
-        if(num > 0){
+        if (num > 0) {
             WorkorderTraceVo workorderTraceVo = new WorkorderTraceVo();
             workorderTraceVo.setAssignBy(taskActionReqVo.getAssignee());
             workorderTraceVo.setAssignAt(new Date());
