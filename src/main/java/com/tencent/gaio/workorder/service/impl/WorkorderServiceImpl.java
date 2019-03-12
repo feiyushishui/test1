@@ -1,7 +1,7 @@
 package com.tencent.gaio.workorder.service.impl;
 
 import com.tencent.gaio.apis.workorder.entity.WorkorderEntity;
-import com.tencent.gaio.commons.http.WrapperPage;
+import com.tencent.gaio.commons.http.DataPage;
 import com.tencent.gaio.workorder.feign.WorkorderFeign;
 import com.tencent.gaio.workorder.service.intf.IWorkorderService;
 import com.tencent.gaio.workorder.vo.ApplyerVo;
@@ -29,7 +29,7 @@ public class WorkorderServiceImpl implements IWorkorderService {
      * @return
      */
     @Override
-    public WrapperPage workorderDraftPage(Map<String,Object> params){
+    public DataPage workorderDraftPage(Map<String,Object> params){
 
         return workorderFeign.workorderDraftPage(params);
     }

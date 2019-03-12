@@ -1,7 +1,8 @@
 package com.tencent.gaio.workorder.controller;
 
 import com.tencent.gaio.commons.Constants;
-import com.tencent.gaio.commons.http.WrapperPage;
+import com.tencent.gaio.commons.http.DataPage;
+import com.tencent.gaio.commons.http.ResultModel;
 import com.tencent.gaio.commons.util.ParameterUtil;
 import com.tencent.gaio.workorder.service.intf.IWorkorderService;
 import com.tencent.gaio.workorder.service.intf.IWorkorderApplyerService;
@@ -57,10 +58,11 @@ public class WorkorderController {
      * @return
      */
     @RequestMapping(value = {"/workorders"}, method = RequestMethod.GET, params = {Constants.DEFAULT_MARK_PARAMETER + "=page","state=0"})
-    public ResponseEntity<WrapperPage> workorderDraft(HttpServletRequest request){
+    public ResultModel<DataPage> workorderDraft(HttpServletRequest request){
         Map<String, Object> queryParams = ParameterUtil.wrapObjectMap(request.getParameterMap());
-        WrapperPage page = workorderService.workorderDraftPage(queryParams);
-        return ResponseEntity.status(HttpStatus.OK).body(page);
+        DataPage data = workorderService.workorderDraftPage(queryParams);
+        ResultModel resultModel = new ResultModel(data);
+        return resultModel;
     }
 
     /**
