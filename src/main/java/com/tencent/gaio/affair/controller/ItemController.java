@@ -82,7 +82,7 @@ public class ItemController {
      * @param itemTaskCode
      * @return
      */
-    @GetMapping(value = "/{itemTaskCode}", params = {Constants.DEFAULT_MARK_PARAMETER + "=id"})
+    @GetMapping(value = "/{itemTaskCode}")
     public ResponseEntity<ResultModel<ItemEntity>> queryItemById(@PathVariable("itemTaskCode") long itemTaskCode) {
         return ResponseEntity.ok().body(new ResultModel<>(iItemService.queryItemById(itemTaskCode)));
     }

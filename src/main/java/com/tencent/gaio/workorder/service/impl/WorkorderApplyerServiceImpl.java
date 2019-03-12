@@ -24,7 +24,7 @@ public class WorkorderApplyerServiceImpl implements IWorkorderApplyerService {
      * @return
      */
     @Override
-    public ResponseEntity<ApplyerVo> findApplyerByWorkorderid(String workorderid) {
+    public ApplyerVo findApplyerByWorkorderid(String workorderid) {
         return workorderFeign.findApplyerByWorkorderid(workorderid, "id");
     }
 
@@ -35,7 +35,7 @@ public class WorkorderApplyerServiceImpl implements IWorkorderApplyerService {
      * @return
      */
     @Override
-    public ResponseEntity<ApplyerVo> findApplyerByWorkorderCode(String workorderCode) {
+    public ApplyerVo findApplyerByWorkorderCode(String workorderCode) {
         return workorderFeign.findApplyerByWorkorderCode(workorderCode, "code");
     }
 

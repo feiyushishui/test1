@@ -91,7 +91,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/applyers", method = RequestMethod.GET)
-    ResponseEntity<ApplyerVo> findApplyerByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
+    ApplyerVo  findApplyerByWorkorderid(@PathVariable("workorderCode") String workorderId, @RequestParam("mark") String mark);
 
     /**
      * @param workorderCode
@@ -99,7 +99,7 @@ public interface WorkorderFeign {
      * @return
      */
     @RequestMapping(value = "/workorders/{workorderCode}/applyers", method = RequestMethod.GET)
-    ResponseEntity<ApplyerVo> findApplyerByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
+    ApplyerVo  findApplyerByWorkorderCode(@PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
     /**
      * @param workorderId
@@ -139,7 +139,7 @@ public interface WorkorderFeign {
      * @param vo
      * @return
      */
-    @RequestMapping(value = "/{workorderCode}/forms", method = RequestMethod.PUT)
+    @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.PUT)
     String updateFormsByWorkorderCode(@RequestBody WorkorderFormVo vo, @PathVariable("workorderCode") String workorderCode, @RequestParam("mark") String mark);
 
 
@@ -149,7 +149,7 @@ public interface WorkorderFeign {
      * @param vo
      * @return
      */
-    @RequestMapping(value = "/{workorderCode}/forms", method = RequestMethod.PUT)
+    @RequestMapping(value = "/workorders/{workorderCode}/forms", method = RequestMethod.PUT)
     String updateFormsByWorkorderId(@RequestBody WorkorderFormVo vo, @PathVariable("workorderCode") Long workorderId, @RequestParam("mark") String mark);
 
     /**
