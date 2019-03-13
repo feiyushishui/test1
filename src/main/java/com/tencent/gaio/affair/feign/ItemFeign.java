@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
-@FeignClient(name = "${affair-apis:affair-apis}", url = "http://localhost:8080", path = "/items")
+@FeignClient(name = "${affair-apis:affair-apis}", url = "http://localhost:8083", path = "/items")
 public interface ItemFeign {
 
     /**
