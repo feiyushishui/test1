@@ -89,7 +89,7 @@ public class WorkorderController {
      * @param workorderCode
      * @return
      */
-    @PostMapping(value = "/workorders/{workorderCode}/applyers")
+    @PutMapping(value = "/workorders/{workorderCode}/applyers")
     public ResponseEntity<ResultModel> updateWorkorderById(@RequestBody ApplyerVo applyVo, @PathVariable("workorderCode") long workorderCode) {
         return ResponseEntity.ok().body(new ResultModel<>(workorderFormService.updateWorkorderById(applyVo, workorderCode)));
     }
@@ -101,7 +101,7 @@ public class WorkorderController {
      * @param workorderCode
      * @return
      */
-    @PostMapping(value = "/workorders/{workorderCode}/applyers", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
+    @PutMapping(value = "/workorders/{workorderCode}/applyers", params = {Constants.DEFAULT_MARK_PARAMETER + "=code"})
     public ResponseEntity<ResultModel> updateWorkorderByCode(@RequestBody ApplyerVo applyVo, @PathVariable("workorderCode") String workorderCode) {
         return ResponseEntity.ok().body(new ResultModel<>(workorderFormService.updateWorkorderByCode(applyVo, workorderCode)));
     }
