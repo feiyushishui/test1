@@ -11,9 +11,8 @@
         <relativePath/>
     </parent>
     <groupId>com.tencent</groupId>
-    <artifactId>gaio-government</artifactId>
+    <artifactId>demo2</artifactId>
     <version>1.0.0</version>
-    <description>腾讯一网通办产品下的政府端系统</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -80,16 +79,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!-- Redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <!--使用redis实现session共享-->
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
-        </dependency>
+        <!--&lt;!&ndash; Redis &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-data-redis</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;使用redis实现session共享&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.session</groupId>-->
+            <!--<artifactId>spring-session-data-redis</artifactId>-->
+        <!--</dependency>-->
         <!--Feign-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
